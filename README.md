@@ -75,7 +75,7 @@ Here are the steps to run the project locally.
 1. Use the project ID
 
    ```bash
-   firebase use mostlywhat-systems-endeavour
+   firebase use endeavour-systems
    ```
 
 1. Deploy Firestore rules, Firestore indexes, and Cloud Storage rules
