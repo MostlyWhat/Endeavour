@@ -1,5 +1,4 @@
 import { toast } from 'react-hot-toast';
-import { AnimatePresence } from 'framer-motion';
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { clearAllBookmarks } from '@lib/firebase/utils';
@@ -14,7 +13,6 @@ import { StatsEmpty } from '@components/transmit/stats-empty';
 import { Button } from '@components/ui/button';
 import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
-import { Loading } from '@components/ui/loading';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function Bookmarks(): JSX.Element {

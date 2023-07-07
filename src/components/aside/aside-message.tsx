@@ -1,5 +1,6 @@
 import cn from 'clsx';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import type { MotionProps } from 'framer-motion';
 
 export const variants: MotionProps = {
@@ -27,6 +28,17 @@ export function AsideMessage({
         {...variants}
       >
         <h2 className='text-xl font-bold'>Announcement</h2>
+        <p className='text-light-secondary dark:text-dark-primary'>
+          Endeavour is under heavy development. Features are slowly being added
+          and bugs are being fixed. Please be patient.
+        </p>
+        <Link
+          href='/people'
+          className='custom-button accent-tab hover-card block w-full rounded-2xl
+                       rounded-t-none text-center text-main-accent'
+        >
+          Read Announcement
+        </Link>
       </motion.div>
     </section>
   );

@@ -78,9 +78,9 @@ export function TransmitActions({
   const { push } = useRouter();
 
   const {
-    open: removeOpen,
-    openModal: removeOpenModal,
-    closeModal: removeCloseModal
+    open: editOpen,
+    openModal: editOpenModal,
+    closeModal: editCloseModal
   } = useModal();
 
   const {
@@ -89,10 +89,21 @@ export function TransmitActions({
     closeModal: pinCloseModal
   } = useModal();
 
+  const {
+    open: removeOpen,
+    openModal: removeOpenModal,
+    closeModal: removeCloseModal
+  } = useModal();
+
   const { id: userId, following, pinnedTransmit } = user as User;
 
   const isInAdminControl = isAdmin && !isOwner;
   const transmitIsPinned = pinnedTransmit === transmitId;
+
+  const handleEdit = (): void => {
+    editOpenModal();
+    editCloseModal();
+  };
 
   const handleRemove = async (): Promise<void> => {
     if (viewTransmit)
@@ -158,6 +169,40 @@ export function TransmitActions({
     <>
       <Modal
         modalClassName='max-w-xs bg-main-background w-full p-8 rounded-2xl'
+        open={editOpen}
+        closeModal={editCloseModal}
+      >
+        <ActionModal
+          title='Edit Transmit?'
+          description={`This can’t be undone and it will be removed from ${
+            isInAdminControl ? `@${username}'s` : 'your'
+          } profile, the timeline of any accounts that follow ${
+            isInAdminControl ? `@${username}` : 'you'
+          }, and from Endeavour search results.`}
+          mainBtnClassName='bg-accent-red hover:bg-accent-red/90 active:bg-accent-red/75 accent-tab
+                            focus-visible:bg-accent-red/90'
+          mainBtnLabel='Edit'
+          focusOnMainBtn
+          action={handleEdit}
+          closeModal={editCloseModal}
+        />
+      </Modal>
+      <Modal
+        modalClassName='max-w-xs bg-main-background w-full p-8 rounded-2xl'
+        open={pinOpen}
+        closeModal={pinCloseModal}
+      >
+        <ActionModal
+          {...currentPinModalData}
+          mainBtnClassName='bg-light-primary hover:bg-light-primary/90 active:bg-light-primary/80 dark:text-light-primary
+                            dark:bg-light-border dark:hover:bg-light-border/90 dark:active:bg-light-border/75'
+          focusOnMainBtn
+          action={handlePin}
+          closeModal={pinCloseModal}
+        />
+      </Modal>
+      <Modal
+        modalClassName='max-w-xs bg-main-background w-full p-8 rounded-2xl'
         open={removeOpen}
         closeModal={removeCloseModal}
       >
@@ -174,20 +219,6 @@ export function TransmitActions({
           focusOnMainBtn
           action={handleRemove}
           closeModal={removeCloseModal}
-        />
-      </Modal>
-      <Modal
-        modalClassName='max-w-xs bg-main-background w-full p-8 rounded-2xl'
-        open={pinOpen}
-        closeModal={pinCloseModal}
-      >
-        <ActionModal
-          {...currentPinModalData}
-          mainBtnClassName='bg-light-primary hover:bg-light-primary/90 active:bg-light-primary/80 dark:text-light-primary
-                            dark:bg-light-border dark:hover:bg-light-border/90 dark:active:bg-light-border/75'
-          focusOnMainBtn
-          action={handlePin}
-          closeModal={pinCloseModal}
         />
       </Modal>
       <Popover>
@@ -222,13 +253,12 @@ export function TransmitActions({
                 >
                   {(isAdmin || isOwner) && (
                     <Popover.Button
-                      className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
-                                 hover:bg-main-sidebar-background'
+                      className='accent-tab flex w-full gap-3 rounded-md rounded-t-none p-4 hover:bg-main-sidebar-background'
                       as={Button}
-                      onClick={preventBubbling(removeOpenModal)}
+                      onClick={preventBubbling(editOpenModal)}
                     >
-                      <HeroIcon iconName='TrashIcon' />
-                      Delete
+                      <HeroIcon iconName='PencilIcon' />
+                      Edit Transmit
                     </Popover.Button>
                   )}
                   {isOwner ? (
@@ -270,6 +300,17 @@ export function TransmitActions({
                     >
                       <HeroIcon iconName='UserPlusIcon' />
                       Follow @{username}
+                    </Popover.Button>
+                  )}
+                  {(isAdmin || isOwner) && (
+                    <Popover.Button
+                      className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
+                                 hover:bg-main-sidebar-background'
+                      as={Button}
+                      onClick={preventBubbling(removeOpenModal)}
+                    >
+                      <HeroIcon iconName='TrashIcon' />
+                      Delete
                     </Popover.Button>
                   )}
                 </Popover.Panel>

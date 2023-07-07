@@ -193,7 +193,7 @@ export function Input({
 
   const formId = useId();
 
-  const inputLimit = isAdmin ? 560 : 280;
+  const inputLimit = isAdmin ? 1000 : 500;
 
   const inputLength = inputValue.length;
   const isValidInput = !!inputValue.trim().length;
