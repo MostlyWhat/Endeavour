@@ -1,6 +1,6 @@
 import { useRequireAuth } from '@lib/hooks/useRequireAuth';
 import { Aside } from '@components/aside/aside';
-import { AsideTrends } from '@components/aside/aside-trends';
+import { AsideMessage } from '@components/aside/aside-message';
 import { Suggestions } from '@components/aside/suggestions';
 import { Placeholder } from '@components/common/placeholder';
 import type { ReactNode } from 'react';
@@ -22,7 +22,7 @@ export function HomeLayout({ children }: LayoutProps): JSX.Element {
     <>
       {children}
       <Aside>
-        <AsideTrends />
+        <AsideMessage />
         <Suggestions />
       </Aside>
     </>
@@ -35,7 +35,7 @@ export function UserLayout({ children }: LayoutProps): JSX.Element {
       {children}
       <Aside>
         <Suggestions />
-        <AsideTrends />
+        <AsideMessage />
       </Aside>
     </>
   );
@@ -57,7 +57,7 @@ export function PeopleLayout({ children }: LayoutProps): JSX.Element {
     <>
       {children}
       <Aside>
-        <AsideTrends />
+        <AsideMessage />
       </Aside>
     </>
   );

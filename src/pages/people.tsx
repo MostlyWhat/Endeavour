@@ -15,7 +15,7 @@ import { MainContainer } from '@components/home/main-container';
 import { UserCard } from '@components/user/user-card';
 import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
-import { variants } from '@components/aside/aside-trends';
+import { variants } from '@components/aside/aside-message';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function People(): JSX.Element {

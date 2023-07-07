@@ -43,7 +43,7 @@ export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
             <div className='flex gap-1'>
               <UserName verified name='Endeavour' />
               <p className='text-light-secondary dark:text-dark-secondary'>
-                @twitter
+                @endeavour
               </p>
               <div className='flex gap-1 text-light-secondary dark:text-dark-secondary'>
                 <i>·</i>

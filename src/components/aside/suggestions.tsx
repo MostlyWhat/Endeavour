@@ -15,7 +15,7 @@ import { usersCollection } from '@lib/firebase/collections';
 import { UserCard } from '@components/user/user-card';
 import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
-import { variants } from './aside-trends';
+import { variants } from './aside-message';
 
 export function Suggestions(): JSX.Element {
   const { randomSeed } = useAuth();
