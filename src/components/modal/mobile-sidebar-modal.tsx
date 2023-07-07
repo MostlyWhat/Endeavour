@@ -19,9 +19,10 @@ export type MobileNavLink = Omit<NavLink, 'canBeHidden'>;
 
 const topNavLinks: Readonly<MobileNavLink[]> = [
   {
-    href: '/trends',
-    linkName: 'Topics',
-    iconName: 'ChatBubbleBottomCenterTextIcon'
+    href: '/explore',
+    linkName: 'Explore',
+    iconName: 'HashtagIcon',
+    disabled: true
   },
   {
     href: '/bookmarks',
@@ -29,10 +30,9 @@ const topNavLinks: Readonly<MobileNavLink[]> = [
     iconName: 'BookmarkIcon'
   },
   {
-    href: '/lists',
-    linkName: 'Lists',
-    iconName: 'Bars3BottomLeftIcon',
-    disabled: true
+    href: '/updates',
+    linkName: 'Updates',
+    iconName: 'ArrowPathIcon'
   },
   {
     href: '/people',
