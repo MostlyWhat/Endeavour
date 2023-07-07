@@ -4,7 +4,7 @@ import { EMAIL_API, EMAIL_API_PASSWORD, TARGET_EMAIL } from './lib/env';
 import type { Transmit, User } from './types';
 
 export const notifyEmail = regionalFunctions.firestore
-  .document('transmits/{tweetId}')
+  .document('transmits/{transmitId}')
   .onCreate(async (snapshot): Promise<void> => {
     functions.logger.info('Sending notification email.');
 
@@ -24,7 +24,7 @@ export const notifyEmail = regionalFunctions.firestore
       }
     });
 
-    const tweetLink = `https://twitter-clone-ccrsxx.vercel.app/tweet/${snapshot.id}`;
+    const transmitLink = `https://twitter-clone-ccrsxx.vercel.app/transmit/${snapshot.id}`;
 
     const emailHeader = `New Transmit${
       parent ? ' reply' : ''
@@ -32,7 +32,7 @@ export const notifyEmail = regionalFunctions.firestore
 
     const emailText = `${text ?? 'No text provided'}${
       images ? ` (${imagesLength} image${imagesLength > 1 ? 's' : ''})` : ''
-    }\n\nLink to Transmit: ${tweetLink}\n\n- Firebase Function.`;
+    }\n\nLink to Transmit: ${transmitLink}\n\n- Firebase Function.`;
 
     await client.sendMail({
       from: EMAIL_API.value(),

@@ -22,7 +22,7 @@ import type { ReactNode, FormEvent, ChangeEvent, ClipboardEvent } from 'react';
 import type { WithFieldValue } from 'firebase/firestore';
 import type { Variants } from 'framer-motion';
 import type { User } from '@lib/types/user';
-import type { Transmit } from '@lib/types/tweet';
+import type { Transmit } from '@lib/types/transmit';
 import type { FilesWithId, ImagesPreview, ImageData } from '@lib/types/file';
 
 type InputProps = {
@@ -81,7 +81,7 @@ export function Input({
 
     const userId = user?.id as string;
 
-    const tweetData: WithFieldValue<Omit<Transmit, 'id'>> = {
+    const transmitData: WithFieldValue<Omit<Transmit, 'id'>> = {
       text: inputValue.trim() || null,
       parent: isReplying && parent ? parent : null,
       images: await uploadImages(userId, selectedImages),
@@ -95,14 +95,14 @@ export function Input({
 
     await sleep(500);
 
-    const [tweetRef] = await Promise.all([
-      addDoc(transmitsCollection, tweetData),
+    const [transmitRef] = await Promise.all([
+      addDoc(transmitsCollection, transmitData),
       manageTotalTransmits('increment', userId),
-      tweetData.images && manageTotalPhotos('increment', userId),
+      transmitData.images && manageTotalPhotos('increment', userId),
       isReplying && manageReply('increment', parent?.id as string)
     ]);
 
-    const { id: tweetId } = await getDoc(tweetRef);
+    const { id: transmitId } = await getDoc(transmitRef);
 
     if (!modal && !replyModal) {
       discardTransmit();
@@ -115,7 +115,7 @@ export function Input({
       () => (
         <span className='flex gap-2'>
           Your Transmit was sent
-          <Link href={`/tweet/${tweetId}`}>
+          <Link href={`/transmit/${transmitId}`}>
             <a className='custom-underline font-bold'>View</a>
           </Link>
         </span>

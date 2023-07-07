@@ -5,7 +5,7 @@ import { fromTop } from '@components/input/input-form';
 import type { ReactNode } from 'react';
 
 type TransmitStatusProps = {
-  type: 'pin' | 'tweet';
+  type: 'pin' | 'transmit';
   children: ReactNode;
 };
 

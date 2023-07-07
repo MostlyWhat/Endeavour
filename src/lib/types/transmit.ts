@@ -17,9 +17,9 @@ export type Transmit = {
 
 export type TransmitWithUser = Transmit & { user: User };
 
-export const tweetConverter: FirestoreDataConverter<Transmit> = {
-  toFirestore(tweet) {
-    return { ...tweet };
+export const transmitConverter: FirestoreDataConverter<Transmit> = {
+  toFirestore(transmit) {
+    return { ...transmit };
   },
   fromFirestore(snapshot, options) {
     const { id } = snapshot;

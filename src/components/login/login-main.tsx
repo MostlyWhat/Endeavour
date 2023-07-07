@@ -80,27 +80,15 @@ export function LoginMain(): JSX.Element {
                          text-light-secondary inner:text-accent-blue dark:text-dark-secondary'
             >
               By signing up, you agree to the{' '}
-              <a
-                href='https://twitter.com/tos'
-                target='_blank'
-                rel='noreferrer'
-              >
+              <a href='legal/terms-of-service' target='_blank' rel='noreferrer'>
                 Terms of Service
               </a>{' '}
               and{' '}
-              <a
-                href='https://twitter.com/privacy'
-                target='_blank'
-                rel='noreferrer'
-              >
+              <a href='/legal/privacy-policy' target='_blank' rel='noreferrer'>
                 Privacy Policy
               </a>
               , including{' '}
-              <a
-                href='https://help.twitter.com/rules-and-policies/twitter-cookies'
-                target='_blank'
-                rel='noreferrer'
-              >
+              <a href='/legal/cookies-policy' target='_blank' rel='noreferrer'>
                 Cookie Use
               </a>
               .

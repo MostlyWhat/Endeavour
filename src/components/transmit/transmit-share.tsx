@@ -10,17 +10,17 @@ import { siteURL } from '@lib/env';
 import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { ToolTip } from '@components/ui/tooltip';
-import { variants } from './tweet-actions';
+import { variants } from './transmit-actions';
 
 type TransmitShareProps = {
   userId: string;
-  tweetId: string;
+  transmitId: string;
   viewTransmit?: boolean;
 };
 
 export function TransmitShare({
   userId,
-  tweetId,
+  transmitId,
   viewTransmit
 }: TransmitShareProps): JSX.Element {
   const { userBookmarks } = useAuth();
@@ -49,11 +49,13 @@ export function TransmitShare({
 
   const handleCopy = (closeMenu: () => void) => async (): Promise<void> => {
     closeMenu();
-    await navigator.clipboard.writeText(`${siteURL}/tweet/${tweetId}`);
+    await navigator.clipboard.writeText(`${siteURL}/transmit/${transmitId}`);
     toast.success('Copied to clipboard');
   };
 
-  const tweetIsBookmarked = !!userBookmarks?.some(({ id }) => id === tweetId);
+  const transmitIsBookmarked = !!userBookmarks?.some(
+    ({ id }) => id === transmitId
+  );
 
   return (
     <Popover className='relative'>
@@ -94,12 +96,12 @@ export function TransmitShare({
                   <HeroIcon iconName='LinkIcon' />
                   Copy link to Transmit
                 </Popover.Button>
-                {!tweetIsBookmarked ? (
+                {!transmitIsBookmarked ? (
                   <Popover.Button
                     className='accent-tab flex w-full gap-3 rounded-md rounded-t-none p-4 hover:bg-main-sidebar-background'
                     as={Button}
                     onClick={preventBubbling(
-                      handleBookmark(close, 'bookmark', userId, tweetId)
+                      handleBookmark(close, 'bookmark', userId, transmitId)
                     )}
                   >
                     <HeroIcon iconName='BookmarkIcon' />
@@ -110,7 +112,7 @@ export function TransmitShare({
                     className='accent-tab flex w-full gap-3 rounded-md rounded-t-none p-4 hover:bg-main-sidebar-background'
                     as={Button}
                     onClick={preventBubbling(
-                      handleBookmark(close, 'unbookmark', userId, tweetId)
+                      handleBookmark(close, 'unbookmark', userId, transmitId)
                     )}
                   >
                     <HeroIcon iconName='BookmarkSlashIcon' />

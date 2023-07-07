@@ -54,7 +54,7 @@ export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
               At the heart of Endeavour are short messages called Transmits —
               just like this one — which can include photos, videos, links,
               text, hashtags, and mentions like{' '}
-              <span className='text-main-accent'>@MostlyWhat</span>.
+              <span className='text-main-accent'>@mostlywhat</span>.
             </p>
           </div>
         </div>

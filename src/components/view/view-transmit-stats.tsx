@@ -4,14 +4,14 @@ import { useArrayDocument } from '@lib/hooks/useArrayDocument';
 import { useModal } from '@lib/hooks/useModal';
 import { usersCollection } from '@lib/firebase/collections';
 import { Modal } from '@components/modal/modal';
-import { TransmitStatsModal } from '@components/modal/tweet-stats-modal';
-import { NumberStats } from '@components/tweet/number-stats';
+import { TransmitStatsModal } from '@components/modal/transmit-stats-modal';
+import { NumberStats } from '@components/transmit/number-stats';
 import { UserCards } from '@components/user/user-cards';
-import type { Transmit } from '@lib/types/tweet';
+import type { Transmit } from '@lib/types/transmit';
 
 type viewTransmitStats = Pick<Transmit, 'userRetransmits' | 'userLikes'> & {
   likeMove: number;
-  tweetMove: number;
+  transmitMove: number;
   replyMove: number;
   currentLikes: number;
   currentTransmits: number;
@@ -26,7 +26,7 @@ type Stats = [string, StatsType | null, number, number];
 export function ViewTransmitStats({
   likeMove,
   userLikes,
-  tweetMove,
+  transmitMove,
   replyMove,
   userRetransmits,
   currentLikes,
@@ -56,7 +56,7 @@ export function ViewTransmitStats({
 
   const allStats: Readonly<Stats[]> = [
     ['Reply', null, replyMove, currentReplies],
-    ['Retransmit', 'retransmits', tweetMove, currentTransmits],
+    ['Retransmit', 'retransmits', transmitMove, currentTransmits],
     ['Like', 'likes', likeMove, currentLikes]
   ];
 

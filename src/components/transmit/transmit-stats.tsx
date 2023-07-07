@@ -3,10 +3,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import cn from 'clsx';
 import { manageRetransmit, manageLike } from '@lib/firebase/utils';
-import { ViewTransmitStats } from '@components/view/view-tweet-stats';
-import { TransmitOption } from './tweet-option';
-import { TransmitShare } from './tweet-share';
-import type { Transmit } from '@lib/types/tweet';
+import { ViewTransmitStats } from '@components/view/view-transmit-stats';
+import { TransmitOption } from './transmit-option';
+import { TransmitShare } from './transmit-share';
+import type { Transmit } from '@lib/types/transmit';
 
 type TransmitStatsProps = Pick<
   Transmit,
@@ -15,7 +15,7 @@ type TransmitStatsProps = Pick<
   reply?: boolean;
   userId: string;
   isOwner: boolean;
-  tweetId: string;
+  transmitId: string;
   viewTransmit?: boolean;
   openModal?: () => void;
 };
@@ -24,7 +24,7 @@ export function TransmitStats({
   reply,
   userId,
   isOwner,
-  tweetId,
+  transmitId,
   userLikes,
   viewTransmit,
   userRetransmits,
@@ -59,13 +59,13 @@ export function TransmitStats({
     [totalLikes]
   );
 
-  const tweetMove = useMemo(
+  const transmitMove = useMemo(
     () => (totalTransmits > currentTransmits ? -25 : 25),
     [totalTransmits]
   );
 
-  const tweetIsLiked = userLikes.includes(userId);
-  const tweetIsRetransmited = userRetransmits.includes(userId);
+  const transmitIsLiked = userLikes.includes(userId);
+  const transmitIsRetransmited = userRetransmits.includes(userId);
 
   const isStatsVisible = !!(totalReplies || totalTransmits || totalLikes);
 
@@ -75,7 +75,7 @@ export function TransmitStats({
         <ViewTransmitStats
           likeMove={likeMove}
           userLikes={userLikes}
-          tweetMove={tweetMove}
+          transmitMove={transmitMove}
           replyMove={replyMove}
           userRetransmits={userRetransmits}
           currentLikes={currentLikes}
@@ -105,43 +105,43 @@ export function TransmitStats({
         <TransmitOption
           className={cn(
             'hover:text-accent-green focus-visible:text-accent-green',
-            tweetIsRetransmited &&
+            transmitIsRetransmited &&
               'text-accent-green [&>i>svg]:[stroke-width:2px]'
           )}
           iconClassName='group-hover:bg-accent-green/10 group-active:bg-accent-green/20
                          group-focus-visible:bg-accent-green/10 group-focus-visible:ring-accent-green/80'
-          tip={tweetIsRetransmited ? 'Undo Retransmit' : 'Retransmit'}
-          move={tweetMove}
+          tip={transmitIsRetransmited ? 'Undo Retransmit' : 'Retransmit'}
+          move={transmitMove}
           stats={currentTransmits}
           iconName='ArrowPathRoundedSquareIcon'
           viewTransmit={viewTransmit}
           onClick={manageRetransmit(
-            tweetIsRetransmited ? 'unretransmit' : 'retransmit',
+            transmitIsRetransmited ? 'unretransmit' : 'retransmit',
             userId,
-            tweetId
+            transmitId
           )}
         />
         <TransmitOption
           className={cn(
             'hover:text-accent-pink focus-visible:text-accent-pink',
-            tweetIsLiked && 'text-accent-pink [&>i>svg]:fill-accent-pink'
+            transmitIsLiked && 'text-accent-pink [&>i>svg]:fill-accent-pink'
           )}
           iconClassName='group-hover:bg-accent-pink/10 group-active:bg-accent-pink/20
                          group-focus-visible:bg-accent-pink/10 group-focus-visible:ring-accent-pink/80'
-          tip={tweetIsLiked ? 'Unlike' : 'Like'}
+          tip={transmitIsLiked ? 'Unlike' : 'Like'}
           move={likeMove}
           stats={currentLikes}
           iconName='HeartIcon'
           viewTransmit={viewTransmit}
           onClick={manageLike(
-            tweetIsLiked ? 'unlike' : 'like',
+            transmitIsLiked ? 'unlike' : 'like',
             userId,
-            tweetId
+            transmitId
           )}
         />
         <TransmitShare
           userId={userId}
-          tweetId={tweetId}
+          transmitId={transmitId}
           viewTransmit={viewTransmit}
         />
         {isOwner && (

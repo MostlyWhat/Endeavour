@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { doc } from 'firebase/firestore';
 import { useDocument } from '@lib/hooks/useDocument';
 import { transmitsCollection } from '@lib/firebase/collections';
-import { Transmit } from '@components/tweet/tweet';
+import { Transmit } from '@components/transmit/transmit';
 import type { RefObject } from 'react';
 
 type ViewParentTransmitProps = {

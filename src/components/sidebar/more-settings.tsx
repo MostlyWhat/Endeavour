@@ -99,7 +99,7 @@ export function MoreSettings(): JSX.Element {
                         onClick={openModal}
                       >
                         <HeroIcon iconName='PaintBrushIcon' />
-                        Display
+                        Theme
                       </Button>
                     )}
                   </Menu.Item>

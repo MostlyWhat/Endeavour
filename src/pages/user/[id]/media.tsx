@@ -9,9 +9,9 @@ import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
 import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserHomeLayout } from '@components/layout/user-home-layout';
-import { Transmit } from '@components/tweet/tweet';
+import { Transmit } from '@components/transmit/transmit';
 import { Loading } from '@components/ui/loading';
-import { StatsEmpty } from '@components/tweet/stats-empty';
+import { StatsEmpty } from '@components/transmit/stats-empty';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function UserMedia(): JSX.Element {
@@ -47,8 +47,8 @@ export default function UserMedia(): JSX.Element {
         />
       ) : (
         <AnimatePresence mode='popLayout'>
-          {sortedTransmits.map((tweet) => (
-            <Transmit {...tweet} key={tweet.id} />
+          {sortedTransmits.map((transmit) => (
+            <Transmit {...transmit} key={transmit.id} />
           ))}
         </AnimatePresence>
       )}

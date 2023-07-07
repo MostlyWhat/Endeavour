@@ -24,9 +24,9 @@ export type Transmit = {
   userRetransmits: string[];
 };
 
-export const tweetConverter: FirestoreDataConverter<Transmit> = {
-  toFirestore(tweet) {
-    return { ...tweet };
+export const transmitConverter: FirestoreDataConverter<Transmit> = {
+  toFirestore(transmit) {
+    return { ...transmit };
   },
   fromFirestore(snapshot) {
     const data = snapshot.data();

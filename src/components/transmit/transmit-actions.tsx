@@ -24,7 +24,7 @@ import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { CustomIcon } from '@components/ui/custom-icon';
 import type { Variants } from 'framer-motion';
-import type { Transmit } from '@lib/types/tweet';
+import type { Transmit } from '@lib/types/transmit';
 import type { User } from '@lib/types/user';
 
 export const variants: Variants = {
@@ -40,7 +40,7 @@ export const variants: Variants = {
 type TransmitActionsProps = Pick<Transmit, 'createdBy'> & {
   isOwner: boolean;
   ownerId: string;
-  tweetId: string;
+  transmitId: string;
   username: string;
   parentId?: string;
   hasImages: boolean;
@@ -67,7 +67,7 @@ const pinModalData: Readonly<PinModalData[]> = [
 export function TransmitActions({
   isOwner,
   ownerId,
-  tweetId,
+  transmitId,
   parentId,
   username,
   hasImages,
@@ -92,21 +92,21 @@ export function TransmitActions({
   const { id: userId, following, pinnedTransmit } = user as User;
 
   const isInAdminControl = isAdmin && !isOwner;
-  const tweetIsPinned = pinnedTransmit === tweetId;
+  const transmitIsPinned = pinnedTransmit === transmitId;
 
   const handleRemove = async (): Promise<void> => {
     if (viewTransmit)
       if (parentId) {
         const parentSnapshot = await getDoc(doc(transmitsCollection, parentId));
         if (parentSnapshot.exists()) {
-          await push(`/tweet/${parentId}`, undefined, { scroll: false });
+          await push(`/transmit/${parentId}`, undefined, { scroll: false });
           delayScroll(200)();
           await sleep(50);
         } else await push('/home');
       } else await push('/home');
 
     await Promise.all([
-      removeTransmit(tweetId),
+      removeTransmit(transmitId),
       manageTotalTransmits('decrement', ownerId),
       hasImages && manageTotalPhotos('decrement', createdBy),
       parentId && manageReply('decrement', parentId)
@@ -121,12 +121,14 @@ export function TransmitActions({
 
   const handlePin = async (): Promise<void> => {
     await managePinnedTransmit(
-      tweetIsPinned ? 'unpin' : 'pin',
+      transmitIsPinned ? 'unpin' : 'pin',
       userId,
-      tweetId
+      transmitId
     );
     toast.success(
-      `Your tweet was ${tweetIsPinned ? 'unpinned' : 'pinned'} to your profile`
+      `Your transmit was ${
+        transmitIsPinned ? 'unpinned' : 'pinned'
+      } to your profile`
     );
     pinCloseModal();
   };
@@ -147,7 +149,7 @@ export function TransmitActions({
   const userIsFollowed = following.includes(createdBy);
 
   const currentPinModalData = useMemo(
-    () => pinModalData[+tweetIsPinned],
+    () => pinModalData[+transmitIsPinned],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [pinOpen]
   );
@@ -235,7 +237,7 @@ export function TransmitActions({
                       as={Button}
                       onClick={preventBubbling(pinOpenModal)}
                     >
-                      {tweetIsPinned ? (
+                      {transmitIsPinned ? (
                         <>
                           <CustomIcon iconName='PinOffIcon' />
                           Unpin from profile

@@ -9,10 +9,10 @@ import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
 import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserHomeLayout } from '@components/layout/user-home-layout';
-import { Transmit } from '@components/tweet/tweet';
+import { Transmit } from '@components/transmit/transmit';
 import { Loading } from '@components/ui/loading';
-import { StatsEmpty } from '@components/tweet/stats-empty';
-import { TransmitWithParent } from '@components/tweet/tweet-with-parent';
+import { StatsEmpty } from '@components/transmit/stats-empty';
+import { TransmitWithParent } from '@components/transmit/transmit-with-parent';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function UserWithReplies(): JSX.Element {
@@ -49,7 +49,7 @@ export default function UserWithReplies(): JSX.Element {
         <Loading className='mt-5' />
       ) : !data ? (
         <StatsEmpty
-          title={`@${username as string} hasn't tweeted`}
+          title={`@${username as string} hasn't transmited`}
           description='When they do, their Transmits will show up here.'
         />
       ) : (

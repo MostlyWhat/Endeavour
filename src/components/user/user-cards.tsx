@@ -1,12 +1,12 @@
 import cn from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import { StatsEmpty } from '@components/tweet/stats-empty';
+import { StatsEmpty } from '@components/transmit/stats-empty';
 import { Loading } from '@components/ui/loading';
 import { variants } from '@components/user/user-header';
 import { UserCard } from './user-card';
 import type { User } from '@lib/types/user';
-import type { StatsType } from '@components/view/view-tweet-stats';
-import type { StatsEmptyProps } from '@components/tweet/stats-empty';
+import type { StatsType } from '@components/view/view-transmit-stats';
+import type { StatsEmptyProps } from '@components/transmit/stats-empty';
 
 type FollowType = 'following' | 'followers';
 

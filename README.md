@@ -11,8 +11,8 @@ You can see the live website [here](https://endeavour.mostlywhat.com).
 - Authentication with Firebase Authentication
 - Strongly typed React components with TypeScript
 - Users can add transmits, like, retransmit, and reply
-- Users can delete transmits, add a tweet to bookmarks, and pin their tweet
-- Users can add images and GIFs to tweet
+- Users can delete transmits, add a transmit to bookmarks, and pin their transmit
+- Users can add images and GIFs to transmit
 - Users can follow and unfollow other users
 - Users can see their and other followers and the following list
 - Users can see all users and the trending list

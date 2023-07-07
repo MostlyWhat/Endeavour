@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Transmit } from './tweet';
-import { TransmitParent } from './tweet-parent';
-import type { TransmitWithUser } from '@lib/types/tweet';
+import { Transmit } from './transmit';
+import { TransmitParent } from './transmit-parent';
+import type { TransmitWithUser } from '@lib/types/transmit';
 
 type TransmitWithParentProps = {
   data: TransmitWithUser[];
@@ -27,16 +27,16 @@ export function TransmitWithParent({
 
   return (
     <>
-      {filteredData.map((tweet) => (
-        <div className='[&>article:nth-child(2)]:-mt-1' key={tweet.id}>
-          {tweet.parent && (
+      {filteredData.map((transmit) => (
+        <div className='[&>article:nth-child(2)]:-mt-1' key={transmit.id}>
+          {transmit.parent && (
             <TransmitParent
-              parentId={tweet.parent.id}
+              parentId={transmit.parent.id}
               loadedParents={loadedParents}
               addParentId={addParentId}
             />
           )}
-          <Transmit {...tweet} />
+          <Transmit {...transmit} />
         </div>
       ))}
     </>

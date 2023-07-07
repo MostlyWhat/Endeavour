@@ -18,8 +18,8 @@ import { MainHeader } from '@components/home/main-header';
 import { MainContainer } from '@components/home/main-container';
 import { Modal } from '@components/modal/modal';
 import { ActionModal } from '@components/modal/action-modal';
-import { Transmit } from '@components/tweet/tweet';
-import { StatsEmpty } from '@components/tweet/stats-empty';
+import { Transmit } from '@components/transmit/transmit';
+import { StatsEmpty } from '@components/transmit/stats-empty';
 import { Button } from '@components/ui/button';
 import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
@@ -38,13 +38,13 @@ export default function Bookmarks(): JSX.Element {
     { allowNull: true }
   );
 
-  const tweetIds = useMemo(
+  const transmitIds = useMemo(
     () => bookmarksRef?.map(({ id }) => id) ?? [],
     [bookmarksRef]
   );
 
-  const { data: tweetData, loading: tweetLoading } = useArrayDocument(
-    tweetIds,
+  const { data: transmitData, loading: transmitLoading } = useArrayDocument(
+    transmitIds,
     transmitsCollection,
     { includeUser: true }
   );
@@ -94,7 +94,7 @@ export default function Bookmarks(): JSX.Element {
         </Button>
       </MainHeader>
       <section className='mt-0.5'>
-        {bookmarksRefLoading || tweetLoading ? (
+        {bookmarksRefLoading || transmitLoading ? (
           <Loading className='mt-5' />
         ) : !bookmarksRef ? (
           <StatsEmpty
@@ -104,8 +104,8 @@ export default function Bookmarks(): JSX.Element {
           />
         ) : (
           <AnimatePresence mode='popLayout'>
-            {tweetData?.map((tweet) => (
-              <Transmit {...tweet} key={tweet.id} />
+            {transmitData?.map((transmit) => (
+              <Transmit {...transmit} key={transmit.id} />
             ))}
           </AnimatePresence>
         )}

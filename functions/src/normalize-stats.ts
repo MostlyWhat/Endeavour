@@ -1,16 +1,16 @@
 import { functions, firestore, regionalFunctions } from './lib/utils';
-import { tweetConverter, bookmarkConverter } from './types';
+import { transmitConverter, bookmarkConverter } from './types';
 import type { Transmit } from './types';
 
 export const normalizeStats = regionalFunctions.firestore
-  .document('transmits/{tweetId}')
+  .document('transmits/{transmitId}')
   .onDelete(async (snapshot): Promise<void> => {
-    const tweetId = snapshot.id;
-    const tweetData = snapshot.data() as Transmit;
+    const transmitId = snapshot.id;
+    const transmitData = snapshot.data() as Transmit;
 
-    functions.logger.info(`Normalizing stats from tweet ${tweetId}`);
+    functions.logger.info(`Normalizing stats from transmit ${transmitId}`);
 
-    const { userRetransmits, userLikes } = tweetData;
+    const { userRetransmits, userLikes } = transmitData;
 
     const usersStatsToDelete = new Set([...userRetransmits, ...userLikes]);
 
@@ -21,17 +21,17 @@ export const normalizeStats = regionalFunctions.firestore
 
       const userStatsRef = firestore()
         .doc(`users/${userId}/stats/stats`)
-        .withConverter(tweetConverter);
+        .withConverter(transmitConverter);
 
       batch.update(userStatsRef, {
-        transmits: firestore.FieldValue.arrayRemove(tweetId),
-        likes: firestore.FieldValue.arrayRemove(tweetId)
+        transmits: firestore.FieldValue.arrayRemove(transmitId),
+        likes: firestore.FieldValue.arrayRemove(transmitId)
       });
     });
 
     const bookmarksQuery = firestore()
       .collectionGroup('bookmarks')
-      .where('id', '==', tweetId)
+      .where('id', '==', transmitId)
       .withConverter(bookmarkConverter);
 
     const docsSnap = await bookmarksQuery.get();
@@ -45,5 +45,7 @@ export const normalizeStats = regionalFunctions.firestore
 
     await batch.commit();
 
-    functions.logger.info(`Normalizing stats for tweet ${tweetId} is done`);
+    functions.logger.info(
+      `Normalizing stats for transmit ${transmitId} is done`
+    );
   });

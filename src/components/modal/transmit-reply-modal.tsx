@@ -1,24 +1,24 @@
 import { Input } from '@components/input/input';
-import { Transmit } from '@components/tweet/tweet';
-import type { TransmitProps } from '@components/tweet/tweet';
+import { Transmit } from '@components/transmit/transmit';
+import type { TransmitProps } from '@components/transmit/transmit';
 
 type TransmitReplyModalProps = {
-  tweet: TransmitProps;
+  transmit: TransmitProps;
   closeModal: () => void;
 };
 
 export function TransmitReplyModal({
-  tweet,
+  transmit,
   closeModal
 }: TransmitReplyModalProps): JSX.Element {
   return (
     <Input
       modal
       replyModal
-      parent={{ id: tweet.id, username: tweet.user.username }}
+      parent={{ id: transmit.id, username: transmit.user.username }}
       closeModal={closeModal}
     >
-      <Transmit modal parentTransmit {...tweet} />
+      <Transmit modal parentTransmit {...transmit} />
     </Input>
   );
 }

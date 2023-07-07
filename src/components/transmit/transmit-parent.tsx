@@ -3,8 +3,8 @@ import { doc } from 'firebase/firestore';
 import { useDocument } from '@lib/hooks/useDocument';
 import { transmitsCollection } from '@lib/firebase/collections';
 import { getRandomId } from '@lib/random';
-import { Transmit } from './tweet';
-import type { LoadedParents } from './tweet-with-parent';
+import { Transmit } from './transmit';
+import type { LoadedParents } from './transmit-with-parent';
 
 type TransmitParentProps = {
   parentId: string;

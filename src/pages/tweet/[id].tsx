@@ -10,12 +10,12 @@ import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { MainContainer } from '@components/home/main-container';
 import { MainHeader } from '@components/home/main-header';
-import { Transmit } from '@components/tweet/tweet';
-import { ViewTransmit } from '@components/view/view-tweet';
+import { Transmit } from '@components/transmit/transmit';
+import { ViewTransmit } from '@components/view/view-transmit';
 import { SEO } from '@components/common/seo';
 import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
-import { ViewParentTransmit } from '@components/view/view-parent-tweet';
+import { ViewParentTransmit } from '@components/view/view-parent-transmit';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function TransmitId(): JSX.Element {
@@ -24,7 +24,7 @@ export default function TransmitId(): JSX.Element {
     back
   } = useRouter();
 
-  const { data: tweetData, loading: tweetLoading } = useDocument(
+  const { data: transmitData, loading: transmitLoading } = useDocument(
     doc(transmitsCollection, id as string),
     { includeUser: true, allowNull: true }
   );
@@ -40,13 +40,13 @@ export default function TransmitId(): JSX.Element {
     { includeUser: true, allowNull: true }
   );
 
-  const { text, images } = tweetData ?? {};
+  const { text, images } = transmitData ?? {};
 
   const imagesLength = images?.length ?? 0;
-  const parentId = tweetData?.parent?.id;
+  const parentId = transmitData?.parent?.id;
 
-  const pageTitle = tweetData
-    ? `${tweetData.user.name} on Endeavour: "${text ?? ''}${
+  const pageTitle = transmitData
+    ? `${transmitData.user.name} on Endeavour: "${text ?? ''}${
         images ? ` (${imagesLength} image${isPlural(imagesLength)})` : ''
       }" / Endeavour`
     : null;
@@ -59,9 +59,9 @@ export default function TransmitId(): JSX.Element {
         action={back}
       />
       <section>
-        {tweetLoading ? (
+        {transmitLoading ? (
           <Loading className='mt-5' />
-        ) : !tweetData ? (
+        ) : !transmitData ? (
           <>
             <SEO title='Transmit not found / Endeavour' />
             <Error message='Transmit not found' />
@@ -75,14 +75,14 @@ export default function TransmitId(): JSX.Element {
                 viewTransmitRef={viewTransmitRef}
               />
             )}
-            <ViewTransmit viewTransmitRef={viewTransmitRef} {...tweetData} />
-            {tweetData &&
+            <ViewTransmit viewTransmitRef={viewTransmitRef} {...transmitData} />
+            {transmitData &&
               (repliesLoading ? (
                 <Loading className='mt-5' />
               ) : (
                 <AnimatePresence mode='popLayout'>
-                  {repliesData?.map((tweet) => (
-                    <Transmit {...tweet} key={tweet.id} />
+                  {repliesData?.map((transmit) => (
+                    <Transmit {...transmit} key={transmit.id} />
                   ))}
                 </AnimatePresence>
               ))}

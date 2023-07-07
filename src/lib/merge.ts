@@ -6,8 +6,13 @@ export function mergeData<T>(
   sortData: boolean,
   ...transmits: (DataWithDate<T>[] | null)[]
 ): DataWithDate<T>[] | null {
-  const validData = transmits.filter((tweet) => tweet) as DataWithDate<T>[][];
-  const mergeData = validData.reduce((acc, tweet) => [...acc, ...tweet], []);
+  const validData = transmits.filter(
+    (transmit) => transmit
+  ) as DataWithDate<T>[][];
+  const mergeData = validData.reduce(
+    (acc, transmit) => [...acc, ...transmit],
+    []
+  );
 
   return mergeData.length
     ? sortData

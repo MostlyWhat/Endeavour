@@ -13,7 +13,7 @@ import type { MotionProps } from 'framer-motion';
 import type { ImagesPreview, ImageData } from '@lib/types/file';
 
 type ImagePreviewProps = {
-  tweet?: boolean;
+  transmit?: boolean;
   viewTransmit?: boolean;
   previewCount: number;
   imagesPreview: ImagesPreview;
@@ -41,7 +41,7 @@ const postImageBorderRadius: Readonly<PostImageBorderRadius> = {
 };
 
 export function ImagePreview({
-  tweet,
+  transmit,
   viewTransmit,
   previewCount,
   imagesPreview,
@@ -76,7 +76,7 @@ export function ImagePreview({
     setSelectedIndex(nextIndex);
   };
 
-  const isTransmit = tweet ?? viewTransmit;
+  const isTransmit = transmit ?? viewTransmit;
 
   return (
     <div
@@ -98,7 +98,7 @@ export function ImagePreview({
         closePanelOnClick
       >
         <ImageModal
-          tweet={isTransmit}
+          transmit={isTransmit}
           imageData={selectedImage as ImageData}
           previewCount={previewCount}
           selectedIndex={selectedIndex}

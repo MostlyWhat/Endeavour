@@ -5,18 +5,18 @@ import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { delayScroll } from '@lib/utils';
 import { Modal } from '@components/modal/modal';
-import { TransmitReplyModal } from '@components/modal/tweet-reply-modal';
+import { TransmitReplyModal } from '@components/modal/transmit-reply-modal';
 import { ImagePreview } from '@components/input/image-preview';
 import { UserAvatar } from '@components/user/user-avatar';
 import { UserTooltip } from '@components/user/user-tooltip';
 import { UserName } from '@components/user/user-name';
 import { UserUsername } from '@components/user/user-username';
-import { TransmitActions } from './tweet-actions';
-import { TransmitStatus } from './tweet-status';
-import { TransmitStats } from './tweet-stats';
-import { TransmitDate } from './tweet-date';
+import { TransmitActions } from './transmit-actions';
+import { TransmitStatus } from './transmit-status';
+import { TransmitStats } from './transmit-stats';
+import { TransmitDate } from './transmit-date';
 import type { Variants } from 'framer-motion';
-import type { Transmit } from '@lib/types/tweet';
+import type { Transmit } from '@lib/types/transmit';
 import type { User } from '@lib/types/user';
 
 export type TransmitProps = Transmit & {
@@ -33,9 +33,9 @@ export const variants: Variants = {
   exit: { opacity: 0, transition: { duration: 0.2 } }
 };
 
-export function Transmit(tweet: TransmitProps): JSX.Element {
+export function Transmit(transmit: TransmitProps): JSX.Element {
   const {
-    id: tweetId,
+    id: transmitId,
     text,
     modal,
     images,
@@ -48,16 +48,16 @@ export function Transmit(tweet: TransmitProps): JSX.Element {
     parentTransmit,
     userReplies,
     userRetransmits,
-    user: tweetUserData
-  } = tweet;
+    user: transmitUserData
+  } = transmit;
 
-  const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
+  const { id: ownerId, name, username, verified, photoURL } = transmitUserData;
 
   const { user } = useAuth();
 
   const { open, openModal, closeModal } = useModal();
 
-  const tweetLink = `/tweet/${tweetId}`;
+  const transmitLink = `/transmit/${transmitId}`;
 
   const userId = user?.id as string;
 
@@ -72,7 +72,7 @@ export function Transmit(tweet: TransmitProps): JSX.Element {
   } = profile ?? {};
 
   const reply = !!parent;
-  const tweetIsRetransmited = userRetransmits.includes(profileId ?? '');
+  const transmitIsRetransmited = userRetransmits.includes(profileId ?? '');
 
   return (
     <motion.article
@@ -88,9 +88,9 @@ export function Transmit(tweet: TransmitProps): JSX.Element {
         open={open}
         closeModal={closeModal}
       >
-        <TransmitReplyModal tweet={tweet} closeModal={closeModal} />
+        <TransmitReplyModal transmit={transmit} closeModal={closeModal} />
       </Modal>
-      <Link href={tweetLink} scroll={!reply}>
+      <Link href={transmitLink} scroll={!reply}>
         <a
           className={cn(
             `accent-tab hover-card relative flex flex-col 
@@ -108,8 +108,8 @@ export function Transmit(tweet: TransmitProps): JSX.Element {
                   <p className='text-sm font-bold'>Pinned Transmit</p>
                 </TransmitStatus>
               ) : (
-                tweetIsRetransmited && (
-                  <TransmitStatus type='tweet'>
+                transmitIsRetransmited && (
+                  <TransmitStatus type='transmit'>
                     <Link href={profileUsername as string}>
                       <a className='custom-underline truncate text-sm font-bold'>
                         {userId === profileId ? 'You' : profileName}{' '}
@@ -121,7 +121,7 @@ export function Transmit(tweet: TransmitProps): JSX.Element {
               )}
             </AnimatePresence>
             <div className='flex flex-col items-center gap-2'>
-              <UserTooltip avatar modal={modal} {...tweetUserData}>
+              <UserTooltip avatar modal={modal} {...transmitUserData}>
                 <UserAvatar src={photoURL} alt={name} username={username} />
               </UserTooltip>
               {parentTransmit && (
@@ -131,7 +131,7 @@ export function Transmit(tweet: TransmitProps): JSX.Element {
             <div className='flex min-w-0 flex-col'>
               <div className='flex justify-between gap-2 text-light-secondary dark:text-dark-secondary'>
                 <div className='flex gap-1 truncate xs:overflow-visible xs:whitespace-normal'>
-                  <UserTooltip modal={modal} {...tweetUserData}>
+                  <UserTooltip modal={modal} {...transmitUserData}>
                     <UserName
                       name={name}
                       username={username}
@@ -139,17 +139,20 @@ export function Transmit(tweet: TransmitProps): JSX.Element {
                       className='text-light-primary dark:text-dark-primary'
                     />
                   </UserTooltip>
-                  <UserTooltip modal={modal} {...tweetUserData}>
+                  <UserTooltip modal={modal} {...transmitUserData}>
                     <UserUsername username={username} />
                   </UserTooltip>
-                  <TransmitDate tweetLink={tweetLink} createdAt={createdAt} />
+                  <TransmitDate
+                    transmitLink={transmitLink}
+                    createdAt={createdAt}
+                  />
                 </div>
                 <div className='px-4'>
                   {!modal && (
                     <TransmitActions
                       isOwner={isOwner}
                       ownerId={ownerId}
-                      tweetId={tweetId}
+                      transmitId={transmitId}
                       parentId={parentId}
                       username={username}
                       hasImages={!!images}
@@ -179,7 +182,7 @@ export function Transmit(tweet: TransmitProps): JSX.Element {
               <div className='mt-1 flex flex-col gap-2'>
                 {images && (
                   <ImagePreview
-                    tweet
+                    transmit
                     imagesPreview={images}
                     previewCount={images.length}
                   />
@@ -189,7 +192,7 @@ export function Transmit(tweet: TransmitProps): JSX.Element {
                     reply={reply}
                     userId={userId}
                     isOwner={isOwner}
-                    tweetId={tweetId}
+                    transmitId={transmitId}
                     userLikes={userLikes}
                     userReplies={userReplies}
                     userRetransmits={userRetransmits}

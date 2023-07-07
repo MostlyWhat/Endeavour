@@ -77,12 +77,12 @@ export async function updateUsername(
 export async function managePinnedTransmit(
   type: 'pin' | 'unpin',
   userId: string,
-  tweetId: string
+  transmitId: string
 ): Promise<void> {
   const userRef = doc(usersCollection, userId);
   await updateDoc(userRef, {
     updatedAt: serverTimestamp(),
-    pinnedTransmit: type === 'pin' ? tweetId : null
+    pinnedTransmit: type === 'pin' ? transmitId : null
   });
 }
 
@@ -119,8 +119,8 @@ export async function manageFollow(
   await batch.commit();
 }
 
-export async function removeTransmit(tweetId: string): Promise<void> {
-  const userRef = doc(transmitsCollection, tweetId);
+export async function removeTransmit(transmitId: string): Promise<void> {
+  const userRef = doc(transmitsCollection, transmitId);
   await deleteDoc(userRef);
 }
 
@@ -154,17 +154,17 @@ export async function uploadImages(
 
 export async function manageReply(
   type: 'increment' | 'decrement',
-  tweetId: string
+  transmitId: string
 ): Promise<void> {
-  const tweetRef = doc(transmitsCollection, tweetId);
+  const transmitRef = doc(transmitsCollection, transmitId);
 
   try {
-    await updateDoc(tweetRef, {
+    await updateDoc(transmitRef, {
       userReplies: increment(type === 'increment' ? 1 : -1),
       updatedAt: serverTimestamp()
     });
   } catch {
-    // do nothing, because parent tweet was already deleted
+    // do nothing, because parent transmit was already deleted
   }
 }
 
@@ -193,30 +193,30 @@ export async function manageTotalPhotos(
 export function manageRetransmit(
   type: 'retransmit' | 'unretransmit',
   userId: string,
-  tweetId: string
+  transmitId: string
 ) {
   return async (): Promise<void> => {
     const batch = writeBatch(db);
 
-    const tweetRef = doc(transmitsCollection, tweetId);
+    const transmitRef = doc(transmitsCollection, transmitId);
     const userStatsRef = doc(userStatsCollection(userId), 'stats');
 
     if (type === 'retransmit') {
-      batch.update(tweetRef, {
+      batch.update(transmitRef, {
         userRetransmits: arrayUnion(userId),
         updatedAt: serverTimestamp()
       });
       batch.update(userStatsRef, {
-        transmits: arrayUnion(tweetId),
+        transmits: arrayUnion(transmitId),
         updatedAt: serverTimestamp()
       });
     } else {
-      batch.update(tweetRef, {
+      batch.update(transmitRef, {
         userRetransmits: arrayRemove(userId),
         updatedAt: serverTimestamp()
       });
       batch.update(userStatsRef, {
-        transmits: arrayRemove(tweetId),
+        transmits: arrayRemove(transmitId),
         updatedAt: serverTimestamp()
       });
     }
@@ -228,30 +228,30 @@ export function manageRetransmit(
 export function manageLike(
   type: 'like' | 'unlike',
   userId: string,
-  tweetId: string
+  transmitId: string
 ) {
   return async (): Promise<void> => {
     const batch = writeBatch(db);
 
     const userStatsRef = doc(userStatsCollection(userId), 'stats');
-    const tweetRef = doc(transmitsCollection, tweetId);
+    const transmitRef = doc(transmitsCollection, transmitId);
 
     if (type === 'like') {
-      batch.update(tweetRef, {
+      batch.update(transmitRef, {
         userLikes: arrayUnion(userId),
         updatedAt: serverTimestamp()
       });
       batch.update(userStatsRef, {
-        likes: arrayUnion(tweetId),
+        likes: arrayUnion(transmitId),
         updatedAt: serverTimestamp()
       });
     } else {
-      batch.update(tweetRef, {
+      batch.update(transmitRef, {
         userLikes: arrayRemove(userId),
         updatedAt: serverTimestamp()
       });
       batch.update(userStatsRef, {
-        likes: arrayRemove(tweetId),
+        likes: arrayRemove(transmitId),
         updatedAt: serverTimestamp()
       });
     }
@@ -263,13 +263,13 @@ export function manageLike(
 export async function manageBookmark(
   type: 'bookmark' | 'unbookmark',
   userId: string,
-  tweetId: string
+  transmitId: string
 ): Promise<void> {
-  const bookmarkRef = doc(userBookmarksCollection(userId), tweetId);
+  const bookmarkRef = doc(userBookmarksCollection(userId), transmitId);
 
   if (type === 'bookmark') {
     const bookmarkData: WithFieldValue<Bookmark> = {
-      id: tweetId,
+      id: transmitId,
       createdAt: serverTimestamp()
     };
     await setDoc(bookmarkRef, bookmarkData);

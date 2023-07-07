@@ -4,29 +4,29 @@ import cn from 'clsx';
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { Modal } from '@components/modal/modal';
-import { TransmitReplyModal } from '@components/modal/tweet-reply-modal';
+import { TransmitReplyModal } from '@components/modal/transmit-reply-modal';
 import { ImagePreview } from '@components/input/image-preview';
 import { UserAvatar } from '@components/user/user-avatar';
 import { UserTooltip } from '@components/user/user-tooltip';
 import { UserName } from '@components/user/user-name';
 import { UserUsername } from '@components/user/user-username';
-import { variants } from '@components/tweet/tweet';
-import { TransmitActions } from '@components/tweet/tweet-actions';
-import { TransmitStats } from '@components/tweet/tweet-stats';
-import { TransmitDate } from '@components/tweet/tweet-date';
+import { variants } from '@components/transmit/transmit';
+import { TransmitActions } from '@components/transmit/transmit-actions';
+import { TransmitStats } from '@components/transmit/transmit-stats';
+import { TransmitDate } from '@components/transmit/transmit-date';
 import { Input } from '@components/input/input';
 import type { RefObject } from 'react';
 import type { User } from '@lib/types/user';
-import type { Transmit } from '@lib/types/tweet';
+import type { Transmit } from '@lib/types/transmit';
 
 type ViewTransmitProps = Transmit & {
   user: User;
   viewTransmitRef?: RefObject<HTMLElement>;
 };
 
-export function ViewTransmit(tweet: ViewTransmitProps): JSX.Element {
+export function ViewTransmit(transmit: ViewTransmitProps): JSX.Element {
   const {
-    id: tweetId,
+    id: transmitId,
     text,
     images,
     parent,
@@ -36,16 +36,16 @@ export function ViewTransmit(tweet: ViewTransmitProps): JSX.Element {
     userRetransmits,
     userReplies,
     viewTransmitRef,
-    user: tweetUserData
-  } = tweet;
+    user: transmitUserData
+  } = transmit;
 
-  const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
+  const { id: ownerId, name, username, verified, photoURL } = transmitUserData;
 
   const { user } = useAuth();
 
   const { open, openModal, closeModal } = useModal();
 
-  const tweetLink = `/tweet/${tweetId}`;
+  const transmitLink = `/transmit/${transmitId}`;
 
   const userId = user?.id as string;
 
@@ -73,7 +73,7 @@ export function ViewTransmit(tweet: ViewTransmitProps): JSX.Element {
         open={open}
         closeModal={closeModal}
       >
-        <TransmitReplyModal tweet={tweet} closeModal={closeModal} />
+        <TransmitReplyModal transmit={transmit} closeModal={closeModal} />
       </Modal>
       <div className='flex flex-col gap-2'>
         {reply && (
@@ -82,12 +82,12 @@ export function ViewTransmit(tweet: ViewTransmitProps): JSX.Element {
           </div>
         )}
         <div className='grid grid-cols-[auto,1fr] gap-3'>
-          <UserTooltip avatar {...tweetUserData}>
+          <UserTooltip avatar {...transmitUserData}>
             <UserAvatar src={photoURL} alt={name} username={username} />
           </UserTooltip>
           <div className='flex min-w-0 justify-between'>
             <div className='flex flex-col truncate xs:overflow-visible xs:whitespace-normal'>
-              <UserTooltip {...tweetUserData}>
+              <UserTooltip {...transmitUserData}>
                 <UserName
                   className='-mb-1'
                   name={name}
@@ -95,7 +95,7 @@ export function ViewTransmit(tweet: ViewTransmitProps): JSX.Element {
                   verified={verified}
                 />
               </UserTooltip>
-              <UserTooltip {...tweetUserData}>
+              <UserTooltip {...transmitUserData}>
                 <UserUsername username={username} />
               </UserTooltip>
             </div>
@@ -104,7 +104,7 @@ export function ViewTransmit(tweet: ViewTransmitProps): JSX.Element {
                 viewTransmit
                 isOwner={isOwner}
                 ownerId={ownerId}
-                tweetId={tweetId}
+                transmitId={transmitId}
                 parentId={parentId}
                 username={username}
                 hasImages={!!images}
@@ -141,7 +141,7 @@ export function ViewTransmit(tweet: ViewTransmitProps): JSX.Element {
         >
           <TransmitDate
             viewTransmit
-            tweetLink={tweetLink}
+            transmitLink={transmitLink}
             createdAt={createdAt}
           />
           <TransmitStats
@@ -149,14 +149,14 @@ export function ViewTransmit(tweet: ViewTransmitProps): JSX.Element {
             reply={reply}
             userId={userId}
             isOwner={isOwner}
-            tweetId={tweetId}
+            transmitId={transmitId}
             userLikes={userLikes}
             userRetransmits={userRetransmits}
             userReplies={userReplies}
             openModal={openModal}
           />
         </div>
-        <Input reply parent={{ id: tweetId, username: username }} />
+        <Input reply parent={{ id: transmitId, username: username }} />
       </div>
     </motion.article>
   );

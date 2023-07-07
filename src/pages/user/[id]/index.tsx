@@ -9,9 +9,9 @@ import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserHomeLayout } from '@components/layout/user-home-layout';
-import { StatsEmpty } from '@components/tweet/stats-empty';
+import { StatsEmpty } from '@components/transmit/stats-empty';
 import { Loading } from '@components/ui/loading';
-import { Transmit } from '@components/tweet/tweet';
+import { Transmit } from '@components/transmit/transmit';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function UserTransmits(): JSX.Element {
@@ -54,7 +54,7 @@ export default function UserTransmits(): JSX.Element {
         <Loading className='mt-5' />
       ) : !mergedTransmits ? (
         <StatsEmpty
-          title={`@${username as string} hasn't tweeted`}
+          title={`@${username as string} hasn't transmited`}
           description='When they do, their Transmits will show up here.'
         />
       ) : (
@@ -62,8 +62,8 @@ export default function UserTransmits(): JSX.Element {
           {pinnedData && (
             <Transmit pinned {...pinnedData} key={`pinned-${pinnedData.id}`} />
           )}
-          {mergedTransmits.map((tweet) => (
-            <Transmit {...tweet} profile={user} key={tweet.id} />
+          {mergedTransmits.map((transmit) => (
+            <Transmit {...transmit} profile={user} key={transmit.id} />
           ))}
         </AnimatePresence>
       )}
