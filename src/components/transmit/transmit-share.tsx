@@ -38,8 +38,8 @@ export function TransmitShare({
           ? (): JSX.Element => (
               <span className='flex gap-2'>
                 Transmit added to your Bookmarks
-                <Link href='/bookmarks'>
-                  <a className='custom-underline font-bold'>View</a>
+                <Link href='/bookmarks' className='custom-underline font-bold'>
+                  View
                 </Link>
               </span>
             )

@@ -115,8 +115,11 @@ export function Input({
       () => (
         <span className='flex gap-2'>
           Your Transmit was sent
-          <Link href={`/transmit/${transmitId}`}>
-            <a className='custom-underline font-bold'>View</a>
+          <Link
+            href={`/transmit/${transmitId}`}
+            className='custom-underline font-bold'
+          >
+            View
           </Link>
         </span>
       ),
@@ -218,10 +221,11 @@ export function Input({
           {...fromTop}
         >
           Replying to{' '}
-          <Link href={`/user/${parent?.username as string}`}>
-            <a className='custom-underline text-main-accent'>
-              {parent?.username as string}
-            </a>
+          <Link
+            href={`/user/${parent?.username as string}`}
+            className='custom-underline text-main-accent'
+          >
+            {parent?.username as string}
           </Link>
         </motion.p>
       )}

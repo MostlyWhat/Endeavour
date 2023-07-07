@@ -18,15 +18,14 @@ export function TransmitDate({
     <div className={cn('flex gap-1', viewTransmit && 'py-4')}>
       {!viewTransmit && <i>·</i>}
       <div className='group relative'>
-        <Link href={transmitLink}>
-          <a
-            className={cn(
-              'custom-underline peer whitespace-nowrap',
-              viewTransmit && 'text-light-secondary dark:text-dark-secondary'
-            )}
-          >
-            {formatDate(createdAt, viewTransmit ? 'full' : 'transmit')}
-          </a>
+        <Link
+          href={transmitLink}
+          className={cn(
+            'custom-underline peer whitespace-nowrap',
+            viewTransmit && 'text-light-secondary dark:text-dark-secondary'
+          )}
+        >
+          {formatDate(createdAt, viewTransmit ? 'full' : 'transmit')}
         </Link>
         <ToolTip
           className='translate-y-1 peer-focus:opacity-100 peer-focus-visible:visible
