@@ -24,7 +24,7 @@ export const notifyEmail = regionalFunctions.firestore
       }
     });
 
-    const transmitLink = `https://twitter-clone-ccrsxx.vercel.app/transmit/${snapshot.id}`;
+    const transmitLink = `https://endeavour.mostlywhat.com/transmit/${snapshot.id}`;
 
     const emailHeader = `New Transmit${
       parent ? ' reply' : ''
