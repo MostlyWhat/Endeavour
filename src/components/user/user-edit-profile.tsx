@@ -210,14 +210,14 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
       label: 'Bio',
       inputId: 'bio',
       inputValue: editUserData.bio,
-      inputLimit: 160,
+      inputLimit: 200,
       useTextArea: true
     },
     {
       label: 'Location',
       inputId: 'location',
       inputValue: editUserData.location,
-      inputLimit: 30
+      inputLimit: 50
     },
     {
       label: 'Website',
