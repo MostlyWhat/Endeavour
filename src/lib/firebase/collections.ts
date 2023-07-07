@@ -12,7 +12,7 @@ export const usersCollection = collection(db, 'users').withConverter(
   userConverter
 );
 
-export const tweetsCollection = collection(db, 'tweets').withConverter(
+export const transmitsCollection = collection(db, 'transmits').withConverter(
   tweetConverter
 );
 

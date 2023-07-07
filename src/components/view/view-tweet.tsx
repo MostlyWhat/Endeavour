@@ -4,27 +4,27 @@ import cn from 'clsx';
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { Modal } from '@components/modal/modal';
-import { TweetReplyModal } from '@components/modal/tweet-reply-modal';
+import { TransmitReplyModal } from '@components/modal/tweet-reply-modal';
 import { ImagePreview } from '@components/input/image-preview';
 import { UserAvatar } from '@components/user/user-avatar';
 import { UserTooltip } from '@components/user/user-tooltip';
 import { UserName } from '@components/user/user-name';
 import { UserUsername } from '@components/user/user-username';
 import { variants } from '@components/tweet/tweet';
-import { TweetActions } from '@components/tweet/tweet-actions';
-import { TweetStats } from '@components/tweet/tweet-stats';
-import { TweetDate } from '@components/tweet/tweet-date';
+import { TransmitActions } from '@components/tweet/tweet-actions';
+import { TransmitStats } from '@components/tweet/tweet-stats';
+import { TransmitDate } from '@components/tweet/tweet-date';
 import { Input } from '@components/input/input';
 import type { RefObject } from 'react';
 import type { User } from '@lib/types/user';
-import type { Tweet } from '@lib/types/tweet';
+import type { Transmit } from '@lib/types/tweet';
 
-type ViewTweetProps = Tweet & {
+type ViewTransmitProps = Transmit & {
   user: User;
-  viewTweetRef?: RefObject<HTMLElement>;
+  viewTransmitRef?: RefObject<HTMLElement>;
 };
 
-export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
+export function ViewTransmit(tweet: ViewTransmitProps): JSX.Element {
   const {
     id: tweetId,
     text,
@@ -33,9 +33,9 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     userLikes,
     createdBy,
     createdAt,
-    userRetweets,
+    userRetransmits,
     userReplies,
-    viewTweetRef,
+    viewTransmitRef,
     user: tweetUserData
   } = tweet;
 
@@ -65,7 +65,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
       {...variants}
       animate={{ ...variants.animate, transition: { duration: 0.2 } }}
       exit={undefined}
-      ref={viewTweetRef}
+      ref={viewTransmitRef}
     >
       <Modal
         className='flex items-start justify-center'
@@ -73,7 +73,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         open={open}
         closeModal={closeModal}
       >
-        <TweetReplyModal tweet={tweet} closeModal={closeModal} />
+        <TransmitReplyModal tweet={tweet} closeModal={closeModal} />
       </Modal>
       <div className='flex flex-col gap-2'>
         {reply && (
@@ -100,8 +100,8 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
               </UserTooltip>
             </div>
             <div className='px-4'>
-              <TweetActions
-                viewTweet
+              <TransmitActions
+                viewTransmit
                 isOwner={isOwner}
                 ownerId={ownerId}
                 tweetId={tweetId}
@@ -130,7 +130,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         )}
         {images && (
           <ImagePreview
-            viewTweet
+            viewTransmit
             imagesPreview={images}
             previewCount={images.length}
           />
@@ -139,15 +139,19 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
           className='inner:hover-animation inner:border-b inner:border-light-border
                      dark:inner:border-dark-border'
         >
-          <TweetDate viewTweet tweetLink={tweetLink} createdAt={createdAt} />
-          <TweetStats
-            viewTweet
+          <TransmitDate
+            viewTransmit
+            tweetLink={tweetLink}
+            createdAt={createdAt}
+          />
+          <TransmitStats
+            viewTransmit
             reply={reply}
             userId={userId}
             isOwner={isOwner}
             tweetId={tweetId}
             userLikes={userLikes}
-            userRetweets={userRetweets}
+            userRetransmits={userRetransmits}
             userReplies={userReplies}
             openModal={openModal}
           />

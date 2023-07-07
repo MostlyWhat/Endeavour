@@ -2,21 +2,21 @@
 
 Introducing Endeavour, a social media inspired by Twitter and built with Next.js + TypeScript + Tailwind CSS using Cloud Firestore and Storage.
 
-## Preview 📸
+## Live Preview 📸
 
-You can see the live demo [here](https://endeavour.mostlywhat.com).
+You can see the live website [here](https://endeavour.mostlywhat.com).
 
 ## Features ✨
 
 - Authentication with Firebase Authentication
 - Strongly typed React components with TypeScript
-- Users can add tweets, like, retweet, and reply
-- Users can delete tweets, add a tweet to bookmarks, and pin their tweet
+- Users can add transmits, like, retransmit, and reply
+- Users can delete transmits, add a tweet to bookmarks, and pin their tweet
 - Users can add images and GIFs to tweet
 - Users can follow and unfollow other users
 - Users can see their and other followers and the following list
 - Users can see all users and the trending list
-- Realtime update likes, retweets, and user profile
+- Realtime update likes, retransmits, and user profile
 - Realtime trending data from Twitter API
 - User can edit their profile
 - Responsive design for mobile, tablet, and desktop

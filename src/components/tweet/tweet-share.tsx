@@ -12,17 +12,17 @@ import { HeroIcon } from '@components/ui/hero-icon';
 import { ToolTip } from '@components/ui/tooltip';
 import { variants } from './tweet-actions';
 
-type TweetShareProps = {
+type TransmitShareProps = {
   userId: string;
   tweetId: string;
-  viewTweet?: boolean;
+  viewTransmit?: boolean;
 };
 
-export function TweetShare({
+export function TransmitShare({
   userId,
   tweetId,
-  viewTweet
-}: TweetShareProps): JSX.Element {
+  viewTransmit
+}: TransmitShareProps): JSX.Element {
   const { userBookmarks } = useAuth();
 
   const handleBookmark =
@@ -37,13 +37,13 @@ export function TweetShare({
         type === 'bookmark'
           ? (): JSX.Element => (
               <span className='flex gap-2'>
-                Tweet added to your Bookmarks
+                Transmit added to your Bookmarks
                 <Link href='/bookmarks'>
                   <a className='custom-underline font-bold'>View</a>
                 </Link>
               </span>
             )
-          : 'Tweet removed from your bookmarks'
+          : 'Transmit removed from your bookmarks'
       );
     };
 
@@ -72,7 +72,7 @@ export function TweetShare({
                          group-focus-visible:ring-accent-blue/80 group-active:bg-accent-blue/20'
             >
               <HeroIcon
-                className={viewTweet ? 'h-6 w-6' : 'h-5 w-5'}
+                className={viewTransmit ? 'h-6 w-6' : 'h-5 w-5'}
                 iconName='ArrowUpTrayIcon'
               />
               {!open && <ToolTip tip='Share' />}
@@ -92,7 +92,7 @@ export function TweetShare({
                   onClick={preventBubbling(handleCopy(close))}
                 >
                   <HeroIcon iconName='LinkIcon' />
-                  Copy link to Tweet
+                  Copy link to Transmit
                 </Popover.Button>
                 {!tweetIsBookmarked ? (
                   <Popover.Button
@@ -114,7 +114,7 @@ export function TweetShare({
                     )}
                   >
                     <HeroIcon iconName='BookmarkSlashIcon' />
-                    Remove Tweet from Bookmarks
+                    Remove Transmit from Bookmarks
                   </Popover.Button>
                 )}
               </Popover.Panel>

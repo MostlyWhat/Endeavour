@@ -4,42 +4,42 @@ import { useArrayDocument } from '@lib/hooks/useArrayDocument';
 import { useModal } from '@lib/hooks/useModal';
 import { usersCollection } from '@lib/firebase/collections';
 import { Modal } from '@components/modal/modal';
-import { TweetStatsModal } from '@components/modal/tweet-stats-modal';
+import { TransmitStatsModal } from '@components/modal/tweet-stats-modal';
 import { NumberStats } from '@components/tweet/number-stats';
 import { UserCards } from '@components/user/user-cards';
-import type { Tweet } from '@lib/types/tweet';
+import type { Transmit } from '@lib/types/tweet';
 
-type viewTweetStats = Pick<Tweet, 'userRetweets' | 'userLikes'> & {
+type viewTransmitStats = Pick<Transmit, 'userRetransmits' | 'userLikes'> & {
   likeMove: number;
   tweetMove: number;
   replyMove: number;
   currentLikes: number;
-  currentTweets: number;
+  currentTransmits: number;
   currentReplies: number;
   isStatsVisible: boolean;
 };
 
-export type StatsType = 'retweets' | 'likes';
+export type StatsType = 'retransmits' | 'likes';
 
 type Stats = [string, StatsType | null, number, number];
 
-export function ViewTweetStats({
+export function ViewTransmitStats({
   likeMove,
   userLikes,
   tweetMove,
   replyMove,
-  userRetweets,
+  userRetransmits,
   currentLikes,
-  currentTweets,
+  currentTransmits,
   currentReplies,
   isStatsVisible
-}: viewTweetStats): JSX.Element {
+}: viewTransmitStats): JSX.Element {
   const [statsType, setStatsType] = useState<StatsType | null>(null);
 
   const { open, openModal, closeModal } = useModal();
 
   const { data, loading } = useArrayDocument(
-    statsType ? (statsType === 'likes' ? userLikes : userRetweets) : [],
+    statsType ? (statsType === 'likes' ? userLikes : userRetransmits) : [],
     usersCollection,
     { disabled: !statsType }
   );
@@ -56,7 +56,7 @@ export function ViewTweetStats({
 
   const allStats: Readonly<Stats[]> = [
     ['Reply', null, replyMove, currentReplies],
-    ['Retweet', 'retweets', tweetMove, currentTweets],
+    ['Retransmit', 'retransmits', tweetMove, currentTransmits],
     ['Like', 'likes', likeMove, currentLikes]
   ];
 
@@ -68,14 +68,14 @@ export function ViewTweetStats({
         open={open}
         closeModal={handleClose}
       >
-        <TweetStatsModal statsType={statsType} handleClose={handleClose}>
+        <TransmitStatsModal statsType={statsType} handleClose={handleClose}>
           <UserCards
             follow
             type={statsType as StatsType}
             data={data}
             loading={loading}
           />
-        </TweetStatsModal>
+        </TransmitStatsModal>
       </Modal>
       {isStatsVisible && (
         <div

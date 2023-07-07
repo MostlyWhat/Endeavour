@@ -8,7 +8,7 @@ import { useCollection } from '@lib/hooks/useCollection';
 import { useArrayDocument } from '@lib/hooks/useArrayDocument';
 import { clearAllBookmarks } from '@lib/firebase/utils';
 import {
-  tweetsCollection,
+  transmitsCollection,
   userBookmarksCollection
 } from '@lib/firebase/collections';
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
@@ -18,7 +18,7 @@ import { MainHeader } from '@components/home/main-header';
 import { MainContainer } from '@components/home/main-container';
 import { Modal } from '@components/modal/modal';
 import { ActionModal } from '@components/modal/action-modal';
-import { Tweet } from '@components/tweet/tweet';
+import { Transmit } from '@components/tweet/tweet';
 import { StatsEmpty } from '@components/tweet/stats-empty';
 import { Button } from '@components/ui/button';
 import { ToolTip } from '@components/ui/tooltip';
@@ -45,7 +45,7 @@ export default function Bookmarks(): JSX.Element {
 
   const { data: tweetData, loading: tweetLoading } = useArrayDocument(
     tweetIds,
-    tweetsCollection,
+    transmitsCollection,
     { includeUser: true }
   );
 
@@ -65,7 +65,7 @@ export default function Bookmarks(): JSX.Element {
       >
         <ActionModal
           title='Clear all Bookmarks?'
-          description='This can’t be undone and you’ll remove all Tweets you’ve added to your Bookmarks.'
+          description='This can’t be undone and you’ll remove all Transmits you’ve added to your Bookmarks.'
           mainBtnClassName='bg-accent-red hover:bg-accent-red/90 active:bg-accent-red/75 accent-tab 
                             focus-visible:bg-accent-red/90'
           mainBtnLabel='Clear'
@@ -98,14 +98,14 @@ export default function Bookmarks(): JSX.Element {
           <Loading className='mt-5' />
         ) : !bookmarksRef ? (
           <StatsEmpty
-            title='Save Tweets for later'
-            description='Don’t let the good ones fly away! Bookmark Tweets to easily find them again in the future.'
+            title='Save Transmits for later'
+            description='Don’t let the good ones fly away! Bookmark Transmits to easily find them again in the future.'
             imageData={{ src: '/assets/no-bookmarks.png', alt: 'No bookmarks' }}
           />
         ) : (
           <AnimatePresence mode='popLayout'>
             {tweetData?.map((tweet) => (
-              <Tweet {...tweet} key={tweet.id} />
+              <Transmit {...tweet} key={tweet.id} />
             ))}
           </AnimatePresence>
         )}

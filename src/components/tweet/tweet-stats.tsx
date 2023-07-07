@@ -2,52 +2,52 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import cn from 'clsx';
-import { manageRetweet, manageLike } from '@lib/firebase/utils';
-import { ViewTweetStats } from '@components/view/view-tweet-stats';
-import { TweetOption } from './tweet-option';
-import { TweetShare } from './tweet-share';
-import type { Tweet } from '@lib/types/tweet';
+import { manageRetransmit, manageLike } from '@lib/firebase/utils';
+import { ViewTransmitStats } from '@components/view/view-tweet-stats';
+import { TransmitOption } from './tweet-option';
+import { TransmitShare } from './tweet-share';
+import type { Transmit } from '@lib/types/tweet';
 
-type TweetStatsProps = Pick<
-  Tweet,
-  'userLikes' | 'userRetweets' | 'userReplies'
+type TransmitStatsProps = Pick<
+  Transmit,
+  'userLikes' | 'userRetransmits' | 'userReplies'
 > & {
   reply?: boolean;
   userId: string;
   isOwner: boolean;
   tweetId: string;
-  viewTweet?: boolean;
+  viewTransmit?: boolean;
   openModal?: () => void;
 };
 
-export function TweetStats({
+export function TransmitStats({
   reply,
   userId,
   isOwner,
   tweetId,
   userLikes,
-  viewTweet,
-  userRetweets,
+  viewTransmit,
+  userRetransmits,
   userReplies: totalReplies,
   openModal
-}: TweetStatsProps): JSX.Element {
+}: TransmitStatsProps): JSX.Element {
   const totalLikes = userLikes.length;
-  const totalTweets = userRetweets.length;
+  const totalTransmits = userRetransmits.length;
 
-  const [{ currentReplies, currentTweets, currentLikes }, setCurrentStats] =
+  const [{ currentReplies, currentTransmits, currentLikes }, setCurrentStats] =
     useState({
       currentReplies: totalReplies,
       currentLikes: totalLikes,
-      currentTweets: totalTweets
+      currentTransmits: totalTransmits
     });
 
   useEffect(() => {
     setCurrentStats({
       currentReplies: totalReplies,
       currentLikes: totalLikes,
-      currentTweets: totalTweets
+      currentTransmits: totalTransmits
     });
-  }, [totalReplies, totalLikes, totalTweets]);
+  }, [totalReplies, totalLikes, totalTransmits]);
 
   const replyMove = useMemo(
     () => (totalReplies > currentReplies ? -25 : 25),
@@ -60,26 +60,26 @@ export function TweetStats({
   );
 
   const tweetMove = useMemo(
-    () => (totalTweets > currentTweets ? -25 : 25),
-    [totalTweets]
+    () => (totalTransmits > currentTransmits ? -25 : 25),
+    [totalTransmits]
   );
 
   const tweetIsLiked = userLikes.includes(userId);
-  const tweetIsRetweeted = userRetweets.includes(userId);
+  const tweetIsRetransmited = userRetransmits.includes(userId);
 
-  const isStatsVisible = !!(totalReplies || totalTweets || totalLikes);
+  const isStatsVisible = !!(totalReplies || totalTransmits || totalLikes);
 
   return (
     <>
-      {viewTweet && (
-        <ViewTweetStats
+      {viewTransmit && (
+        <ViewTransmitStats
           likeMove={likeMove}
           userLikes={userLikes}
           tweetMove={tweetMove}
           replyMove={replyMove}
-          userRetweets={userRetweets}
+          userRetransmits={userRetransmits}
           currentLikes={currentLikes}
-          currentTweets={currentTweets}
+          currentTransmits={currentTransmits}
           currentReplies={currentReplies}
           isStatsVisible={isStatsVisible}
         />
@@ -87,10 +87,10 @@ export function TweetStats({
       <div
         className={cn(
           'flex text-light-secondary inner:outline-none dark:text-dark-secondary',
-          viewTweet ? 'justify-around py-2' : 'max-w-md justify-between'
+          viewTransmit ? 'justify-around py-2' : 'max-w-md justify-between'
         )}
       >
-        <TweetOption
+        <TransmitOption
           className='hover:text-accent-blue focus-visible:text-accent-blue'
           iconClassName='group-hover:bg-accent-blue/10 group-active:bg-accent-blue/20 
                          group-focus-visible:bg-accent-blue/10 group-focus-visible:ring-accent-blue/80'
@@ -98,29 +98,30 @@ export function TweetStats({
           move={replyMove}
           stats={currentReplies}
           iconName='ChatBubbleOvalLeftIcon'
-          viewTweet={viewTweet}
+          viewTransmit={viewTransmit}
           onClick={openModal}
           disabled={reply}
         />
-        <TweetOption
+        <TransmitOption
           className={cn(
             'hover:text-accent-green focus-visible:text-accent-green',
-            tweetIsRetweeted && 'text-accent-green [&>i>svg]:[stroke-width:2px]'
+            tweetIsRetransmited &&
+              'text-accent-green [&>i>svg]:[stroke-width:2px]'
           )}
           iconClassName='group-hover:bg-accent-green/10 group-active:bg-accent-green/20
                          group-focus-visible:bg-accent-green/10 group-focus-visible:ring-accent-green/80'
-          tip={tweetIsRetweeted ? 'Undo Retweet' : 'Retweet'}
+          tip={tweetIsRetransmited ? 'Undo Retransmit' : 'Retransmit'}
           move={tweetMove}
-          stats={currentTweets}
+          stats={currentTransmits}
           iconName='ArrowPathRoundedSquareIcon'
-          viewTweet={viewTweet}
-          onClick={manageRetweet(
-            tweetIsRetweeted ? 'unretweet' : 'retweet',
+          viewTransmit={viewTransmit}
+          onClick={manageRetransmit(
+            tweetIsRetransmited ? 'unretransmit' : 'retransmit',
             userId,
             tweetId
           )}
         />
-        <TweetOption
+        <TransmitOption
           className={cn(
             'hover:text-accent-pink focus-visible:text-accent-pink',
             tweetIsLiked && 'text-accent-pink [&>i>svg]:fill-accent-pink'
@@ -131,16 +132,20 @@ export function TweetStats({
           move={likeMove}
           stats={currentLikes}
           iconName='HeartIcon'
-          viewTweet={viewTweet}
+          viewTransmit={viewTransmit}
           onClick={manageLike(
             tweetIsLiked ? 'unlike' : 'like',
             userId,
             tweetId
           )}
         />
-        <TweetShare userId={userId} tweetId={tweetId} viewTweet={viewTweet} />
+        <TransmitShare
+          userId={userId}
+          tweetId={tweetId}
+          viewTransmit={viewTransmit}
+        />
         {isOwner && (
-          <TweetOption
+          <TransmitOption
             className='hover:text-accent-blue focus-visible:text-accent-blue'
             iconClassName='group-hover:bg-accent-blue/10 group-active:bg-accent-blue/20 
                            group-focus-visible:bg-accent-blue/10 group-focus-visible:ring-accent-blue/80'

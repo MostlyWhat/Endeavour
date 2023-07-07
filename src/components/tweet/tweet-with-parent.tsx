@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import { Tweet } from './tweet';
-import { TweetParent } from './tweet-parent';
-import type { TweetWithUser } from '@lib/types/tweet';
+import { Transmit } from './tweet';
+import { TransmitParent } from './tweet-parent';
+import type { TransmitWithUser } from '@lib/types/tweet';
 
-type TweetWithParentProps = {
-  data: TweetWithUser[];
+type TransmitWithParentProps = {
+  data: TransmitWithUser[];
 };
 
 export type LoadedParents = Record<'parentId' | 'childId', string>[];
 
-export function TweetWithParent({ data }: TweetWithParentProps): JSX.Element {
+export function TransmitWithParent({
+  data
+}: TransmitWithParentProps): JSX.Element {
   const [loadedParents, setLoadedParents] = useState<LoadedParents>([]);
 
   const addParentId = (parentId: string, targetChildId: string): void =>
@@ -28,13 +30,13 @@ export function TweetWithParent({ data }: TweetWithParentProps): JSX.Element {
       {filteredData.map((tweet) => (
         <div className='[&>article:nth-child(2)]:-mt-1' key={tweet.id}>
           {tweet.parent && (
-            <TweetParent
+            <TransmitParent
               parentId={tweet.parent.id}
               loadedParents={loadedParents}
               addParentId={addParentId}
             />
           )}
-          <Tweet {...tweet} />
+          <Transmit {...tweet} />
         </div>
       ))}
     </>

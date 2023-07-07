@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import cn from 'clsx';
 import { toast } from 'react-hot-toast';
 import { addDoc, getDoc, serverTimestamp } from 'firebase/firestore';
-import { tweetsCollection } from '@lib/firebase/collections';
+import { transmitsCollection } from '@lib/firebase/collections';
 import {
   manageReply,
   uploadImages,
-  manageTotalTweets,
+  manageTotalTransmits,
   manageTotalPhotos
 } from '@lib/firebase/utils';
 import { useAuth } from '@lib/context/auth-context';
@@ -22,7 +22,7 @@ import type { ReactNode, FormEvent, ChangeEvent, ClipboardEvent } from 'react';
 import type { WithFieldValue } from 'firebase/firestore';
 import type { Variants } from 'framer-motion';
 import type { User } from '@lib/types/user';
-import type { Tweet } from '@lib/types/tweet';
+import type { Transmit } from '@lib/types/tweet';
 import type { FilesWithId, ImagesPreview, ImageData } from '@lib/types/file';
 
 type InputProps = {
@@ -72,7 +72,7 @@ export function Input({
     []
   );
 
-  const sendTweet = async (): Promise<void> => {
+  const sendTransmit = async (): Promise<void> => {
     inputRef.current?.blur();
 
     setLoading(true);
@@ -81,7 +81,7 @@ export function Input({
 
     const userId = user?.id as string;
 
-    const tweetData: WithFieldValue<Omit<Tweet, 'id'>> = {
+    const tweetData: WithFieldValue<Omit<Transmit, 'id'>> = {
       text: inputValue.trim() || null,
       parent: isReplying && parent ? parent : null,
       images: await uploadImages(userId, selectedImages),
@@ -90,14 +90,14 @@ export function Input({
       createdAt: serverTimestamp(),
       updatedAt: null,
       userReplies: 0,
-      userRetweets: []
+      userRetransmits: []
     };
 
     await sleep(500);
 
     const [tweetRef] = await Promise.all([
-      addDoc(tweetsCollection, tweetData),
-      manageTotalTweets('increment', userId),
+      addDoc(transmitsCollection, tweetData),
+      manageTotalTransmits('increment', userId),
       tweetData.images && manageTotalPhotos('increment', userId),
       isReplying && manageReply('increment', parent?.id as string)
     ]);
@@ -105,7 +105,7 @@ export function Input({
     const { id: tweetId } = await getDoc(tweetRef);
 
     if (!modal && !replyModal) {
-      discardTweet();
+      discardTransmit();
       setLoading(false);
     }
 
@@ -114,7 +114,7 @@ export function Input({
     toast.success(
       () => (
         <span className='flex gap-2'>
-          Your Tweet was sent
+          Your Transmit was sent
           <Link href={`/tweet/${tweetId}`}>
             <a className='custom-underline font-bold'>View</a>
           </Link>
@@ -169,7 +169,7 @@ export function Input({
     setImagesPreview([]);
   };
 
-  const discardTweet = (): void => {
+  const discardTransmit = (): void => {
     setInputValue('');
     setVisited(false);
     cleanImage();
@@ -183,7 +183,7 @@ export function Input({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    void sendTweet();
+    void sendTransmit();
   };
 
   const handleFocus = (): void => setVisited(!loading);
@@ -196,7 +196,7 @@ export function Input({
   const isValidInput = !!inputValue.trim().length;
   const isCharLimitExceeded = inputLength > inputLimit;
 
-  const isValidTweet =
+  const isValidTransmit =
     !isCharLimitExceeded && (isValidInput || isUploadingImages);
 
   return (
@@ -248,11 +248,11 @@ export function Input({
             inputRef={inputRef}
             replyModal={replyModal}
             inputValue={inputValue}
-            isValidTweet={isValidTweet}
+            isValidTransmit={isValidTransmit}
             isUploadingImages={isUploadingImages}
-            sendTweet={sendTweet}
+            sendTransmit={sendTransmit}
             handleFocus={handleFocus}
-            discardTweet={discardTweet}
+            discardTransmit={discardTransmit}
             handleChange={handleChange}
             handleImageUpload={handleImageUpload}
           >
@@ -271,7 +271,7 @@ export function Input({
                 modal={modal}
                 inputLimit={inputLimit}
                 inputLength={inputLength}
-                isValidTweet={isValidTweet}
+                isValidTransmit={isValidTransmit}
                 isCharLimitExceeded={isCharLimitExceeded}
                 handleImageUpload={handleImageUpload}
               />

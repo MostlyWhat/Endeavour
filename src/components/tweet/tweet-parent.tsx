@@ -1,29 +1,29 @@
 import { useMemo, useEffect } from 'react';
 import { doc } from 'firebase/firestore';
 import { useDocument } from '@lib/hooks/useDocument';
-import { tweetsCollection } from '@lib/firebase/collections';
+import { transmitsCollection } from '@lib/firebase/collections';
 import { getRandomId } from '@lib/random';
-import { Tweet } from './tweet';
+import { Transmit } from './tweet';
 import type { LoadedParents } from './tweet-with-parent';
 
-type TweetParentProps = {
+type TransmitParentProps = {
   parentId: string;
   loadedParents: LoadedParents;
   addParentId: (parentId: string, componentId: string) => void;
 };
 
-export function TweetParent({
+export function TransmitParent({
   parentId,
   loadedParents,
   addParentId
-}: TweetParentProps): JSX.Element | null {
+}: TransmitParentProps): JSX.Element | null {
   const componentId = useMemo(getRandomId, []);
 
   const isParentAlreadyLoaded = loadedParents.some(
     (child) => child.childId === componentId
   );
 
-  const { data, loading } = useDocument(doc(tweetsCollection, parentId), {
+  const { data, loading } = useDocument(doc(transmitsCollection, parentId), {
     includeUser: true,
     allowNull: true,
     disabled: isParentAlreadyLoaded
@@ -36,5 +36,5 @@ export function TweetParent({
 
   if (loading || !isParentAlreadyLoaded || !data) return null;
 
-  return <Tweet parentTweet {...data} />;
+  return <Transmit parentTransmit {...data} />;
 }

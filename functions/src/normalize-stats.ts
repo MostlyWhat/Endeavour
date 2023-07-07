@@ -1,18 +1,18 @@
 import { functions, firestore, regionalFunctions } from './lib/utils';
 import { tweetConverter, bookmarkConverter } from './types';
-import type { Tweet } from './types';
+import type { Transmit } from './types';
 
 export const normalizeStats = regionalFunctions.firestore
-  .document('tweets/{tweetId}')
+  .document('transmits/{tweetId}')
   .onDelete(async (snapshot): Promise<void> => {
     const tweetId = snapshot.id;
-    const tweetData = snapshot.data() as Tweet;
+    const tweetData = snapshot.data() as Transmit;
 
     functions.logger.info(`Normalizing stats from tweet ${tweetId}`);
 
-    const { userRetweets, userLikes } = tweetData;
+    const { userRetransmits, userLikes } = tweetData;
 
-    const usersStatsToDelete = new Set([...userRetweets, ...userLikes]);
+    const usersStatsToDelete = new Set([...userRetransmits, ...userLikes]);
 
     const batch = firestore().batch();
 
@@ -24,7 +24,7 @@ export const normalizeStats = regionalFunctions.firestore
         .withConverter(tweetConverter);
 
       batch.update(userStatsRef, {
-        tweets: firestore.FieldValue.arrayRemove(tweetId),
+        transmits: firestore.FieldValue.arrayRemove(tweetId),
         likes: firestore.FieldValue.arrayRemove(tweetId)
       });
     });

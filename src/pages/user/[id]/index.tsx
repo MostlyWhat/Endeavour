@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useUser } from '@lib/context/user-context';
 import { useCollection } from '@lib/hooks/useCollection';
 import { useDocument } from '@lib/hooks/useDocument';
-import { tweetsCollection } from '@lib/firebase/collections';
+import { transmitsCollection } from '@lib/firebase/collections';
 import { mergeData } from '@lib/merge';
 import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
@@ -11,59 +11,59 @@ import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserHomeLayout } from '@components/layout/user-home-layout';
 import { StatsEmpty } from '@components/tweet/stats-empty';
 import { Loading } from '@components/ui/loading';
-import { Tweet } from '@components/tweet/tweet';
+import { Transmit } from '@components/tweet/tweet';
 import type { ReactElement, ReactNode } from 'react';
 
-export default function UserTweets(): JSX.Element {
+export default function UserTransmits(): JSX.Element {
   const { user } = useUser();
 
-  const { id, username, pinnedTweet } = user ?? {};
+  const { id, username, pinnedTransmit } = user ?? {};
 
   const { data: pinnedData } = useDocument(
-    doc(tweetsCollection, pinnedTweet ?? 'null'),
+    doc(transmitsCollection, pinnedTransmit ?? 'null'),
     {
-      disabled: !pinnedTweet,
+      disabled: !pinnedTransmit,
       allowNull: true,
       includeUser: true
     }
   );
 
-  const { data: ownerTweets, loading: ownerLoading } = useCollection(
+  const { data: ownerTransmits, loading: ownerLoading } = useCollection(
     query(
-      tweetsCollection,
+      transmitsCollection,
       where('createdBy', '==', id),
       where('parent', '==', null)
     ),
     { includeUser: true, allowNull: true }
   );
 
-  const { data: peopleTweets, loading: peopleLoading } = useCollection(
+  const { data: peopleTransmits, loading: peopleLoading } = useCollection(
     query(
-      tweetsCollection,
+      transmitsCollection,
       where('createdBy', '!=', id),
-      where('userRetweets', 'array-contains', id)
+      where('userRetransmits', 'array-contains', id)
     ),
     { includeUser: true, allowNull: true }
   );
 
-  const mergedTweets = mergeData(true, ownerTweets, peopleTweets);
+  const mergedTransmits = mergeData(true, ownerTransmits, peopleTransmits);
 
   return (
     <section>
       {ownerLoading || peopleLoading ? (
         <Loading className='mt-5' />
-      ) : !mergedTweets ? (
+      ) : !mergedTransmits ? (
         <StatsEmpty
           title={`@${username as string} hasn't tweeted`}
-          description='When they do, their Tweets will show up here.'
+          description='When they do, their Transmits will show up here.'
         />
       ) : (
         <AnimatePresence mode='popLayout'>
           {pinnedData && (
-            <Tweet pinned {...pinnedData} key={`pinned-${pinnedData.id}`} />
+            <Transmit pinned {...pinnedData} key={`pinned-${pinnedData.id}`} />
           )}
-          {mergedTweets.map((tweet) => (
-            <Tweet {...tweet} profile={user} key={tweet.id} />
+          {mergedTransmits.map((tweet) => (
+            <Transmit {...tweet} profile={user} key={tweet.id} />
           ))}
         </AnimatePresence>
       )}
@@ -71,7 +71,7 @@ export default function UserTweets(): JSX.Element {
   );
 }
 
-UserTweets.getLayout = (page: ReactElement): ReactNode => (
+UserTransmits.getLayout = (page: ReactElement): ReactNode => (
   <ProtectedLayout>
     <MainLayout>
       <UserLayout>

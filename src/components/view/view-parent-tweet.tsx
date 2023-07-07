@@ -1,26 +1,26 @@
 import { useEffect } from 'react';
 import { doc } from 'firebase/firestore';
 import { useDocument } from '@lib/hooks/useDocument';
-import { tweetsCollection } from '@lib/firebase/collections';
-import { Tweet } from '@components/tweet/tweet';
+import { transmitsCollection } from '@lib/firebase/collections';
+import { Transmit } from '@components/tweet/tweet';
 import type { RefObject } from 'react';
 
-type ViewParentTweetProps = {
+type ViewParentTransmitProps = {
   parentId: string;
-  viewTweetRef: RefObject<HTMLElement>;
+  viewTransmitRef: RefObject<HTMLElement>;
 };
 
-export function ViewParentTweet({
+export function ViewParentTransmit({
   parentId,
-  viewTweetRef
-}: ViewParentTweetProps): JSX.Element | null {
-  const { data, loading } = useDocument(doc(tweetsCollection, parentId), {
+  viewTransmitRef
+}: ViewParentTransmitProps): JSX.Element | null {
+  const { data, loading } = useDocument(doc(transmitsCollection, parentId), {
     includeUser: true,
     allowNull: true
   });
 
   useEffect(() => {
-    if (!loading) viewTweetRef.current?.scrollIntoView();
+    if (!loading) viewTransmitRef.current?.scrollIntoView();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.id, loading]);
 
@@ -32,7 +32,7 @@ export function ViewParentTweet({
           className='rounded-2xl bg-main-sidebar-background py-3 px-1 pl-4 
                      text-light-secondary dark:text-dark-secondary'
         >
-          This Tweet was deleted by the Tweet author.{' '}
+          This Transmit was deleted by the Transmit author.{' '}
           <a
             className='custom-underline text-main-accent'
             href='https://help.twitter.com/rules-and-policies/notices-on-twitter'
@@ -45,5 +45,5 @@ export function ViewParentTweet({
       </div>
     );
 
-  return <Tweet parentTweet {...data} />;
+  return <Transmit parentTransmit {...data} />;
 }

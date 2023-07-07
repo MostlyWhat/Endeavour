@@ -44,8 +44,8 @@ export function useInfiniteScroll<T>(
 ): InfiniteScroll<T> | InfiniteScrollWithUser<T> {
   const { initialSize, stepSize, marginBottom } = options ?? {};
 
-  const [tweetsLimit, setTweetsLimit] = useState(initialSize ?? 20);
-  const [tweetsSize, setTweetsSize] = useState<number | null>(null);
+  const [transmitsLimit, setTransmitsLimit] = useState(initialSize ?? 20);
+  const [transmitsSize, setTransmitsSize] = useState<number | null>(null);
   const [reachedLimit, setReachedLimit] = useState(false);
   const [loadMoreInView, setLoadMoreInView] = useState(false);
 
@@ -54,40 +54,40 @@ export function useInfiniteScroll<T>(
       collection,
       ...[
         ...(queryConstraints ?? []),
-        ...(!reachedLimit ? [limit(tweetsLimit)] : [])
+        ...(!reachedLimit ? [limit(transmitsLimit)] : [])
       ]
     ),
     fetchOptions
   );
 
   useEffect(() => {
-    const checkLimit = tweetsSize ? tweetsLimit >= tweetsSize : false;
+    const checkLimit = transmitsSize ? transmitsLimit >= transmitsSize : false;
     setReachedLimit(checkLimit);
-  }, [tweetsSize, tweetsLimit]);
+  }, [transmitsSize, transmitsLimit]);
 
   useEffect(() => {
     if (reachedLimit) return;
 
-    const setTweetsLength = async (): Promise<void> => {
-      const currentTweetsSize = await getCollectionCount(
+    const setTransmitsLength = async (): Promise<void> => {
+      const currentTransmitsSize = await getCollectionCount(
         query(collection, ...(queryConstraints ?? []))
       );
-      setTweetsSize(currentTweetsSize);
+      setTransmitsSize(currentTransmitsSize);
     };
 
-    void setTweetsLength();
+    void setTransmitsLength();
   }, [data?.length]);
 
   useEffect(() => {
     if (reachedLimit) return;
-    if (loadMoreInView) setTweetsLimit(tweetsLimit + (stepSize ?? 20));
+    if (loadMoreInView) setTransmitsLimit(transmitsLimit + (stepSize ?? 20));
   }, [loadMoreInView]);
 
   const makeItInView = (): void => setLoadMoreInView(true);
   const makeItNotInView = (): void => setLoadMoreInView(false);
 
   const isLoadMoreHidden =
-    reachedLimit && (data?.length ?? 0) >= (tweetsSize ?? 0);
+    reachedLimit && (data?.length ?? 0) >= (transmitsSize ?? 0);
 
   const LoadMore = useCallback(
     (): JSX.Element => (

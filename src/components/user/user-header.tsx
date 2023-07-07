@@ -32,17 +32,17 @@ export function UserHeader(): JSX.Element {
     }
   );
 
-  const { tweets, likes } = statsData ?? {};
+  const { transmits, likes } = statsData ?? {};
 
-  const [totalTweets, totalPhotos, totalLikes] = [
-    (user?.totalTweets ?? 0) + (tweets?.length ?? 0),
+  const [totalTransmits, totalPhotos, totalLikes] = [
+    (user?.totalTransmits ?? 0) + (transmits?.length ?? 0),
     user?.totalPhotos,
     likes?.length
   ];
 
   const currentPage = pathname.split('/').pop() ?? '';
 
-  const isInTweetPage = ['[id]', 'with_replies'].includes(currentPage);
+  const isInTransmitPage = ['[id]', 'with_replies'].includes(currentPage);
   const isInFollowPage = ['following', 'followers'].includes(currentPage);
 
   return (
@@ -73,10 +73,10 @@ export function UserHeader(): JSX.Element {
           <p className='text-xs text-light-secondary dark:text-dark-secondary'>
             {isInFollowPage
               ? `@${user.username}`
-              : isInTweetPage
-              ? totalTweets
-                ? `${totalTweets} ${`Tweet${isPlural(totalTweets)}`}`
-                : 'No Tweet'
+              : isInTransmitPage
+              ? totalTransmits
+                ? `${totalTransmits} ${`Transmit${isPlural(totalTransmits)}`}`
+                : 'No Transmit'
               : currentPage === 'media'
               ? totalPhotos
                 ? `${totalPhotos} Photo${isPlural(totalPhotos)} & GIF${isPlural(

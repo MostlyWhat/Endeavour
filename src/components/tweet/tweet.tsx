@@ -5,26 +5,26 @@ import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { delayScroll } from '@lib/utils';
 import { Modal } from '@components/modal/modal';
-import { TweetReplyModal } from '@components/modal/tweet-reply-modal';
+import { TransmitReplyModal } from '@components/modal/tweet-reply-modal';
 import { ImagePreview } from '@components/input/image-preview';
 import { UserAvatar } from '@components/user/user-avatar';
 import { UserTooltip } from '@components/user/user-tooltip';
 import { UserName } from '@components/user/user-name';
 import { UserUsername } from '@components/user/user-username';
-import { TweetActions } from './tweet-actions';
-import { TweetStatus } from './tweet-status';
-import { TweetStats } from './tweet-stats';
-import { TweetDate } from './tweet-date';
+import { TransmitActions } from './tweet-actions';
+import { TransmitStatus } from './tweet-status';
+import { TransmitStats } from './tweet-stats';
+import { TransmitDate } from './tweet-date';
 import type { Variants } from 'framer-motion';
-import type { Tweet } from '@lib/types/tweet';
+import type { Transmit } from '@lib/types/tweet';
 import type { User } from '@lib/types/user';
 
-export type TweetProps = Tweet & {
+export type TransmitProps = Transmit & {
   user: User;
   modal?: boolean;
   pinned?: boolean;
   profile?: User | null;
-  parentTweet?: boolean;
+  parentTransmit?: boolean;
 };
 
 export const variants: Variants = {
@@ -33,7 +33,7 @@ export const variants: Variants = {
   exit: { opacity: 0, transition: { duration: 0.2 } }
 };
 
-export function Tweet(tweet: TweetProps): JSX.Element {
+export function Transmit(tweet: TransmitProps): JSX.Element {
   const {
     id: tweetId,
     text,
@@ -45,9 +45,9 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     userLikes,
     createdBy,
     createdAt,
-    parentTweet,
+    parentTransmit,
     userReplies,
-    userRetweets,
+    userRetransmits,
     user: tweetUserData
   } = tweet;
 
@@ -72,14 +72,14 @@ export function Tweet(tweet: TweetProps): JSX.Element {
   } = profile ?? {};
 
   const reply = !!parent;
-  const tweetIsRetweeted = userRetweets.includes(profileId ?? '');
+  const tweetIsRetransmited = userRetransmits.includes(profileId ?? '');
 
   return (
     <motion.article
       {...(!modal ? { ...variants, layout: 'position' } : {})}
       animate={{
         ...variants.animate,
-        ...(parentTweet && { transition: { duration: 0.2 } })
+        ...(parentTransmit && { transition: { duration: 0.2 } })
       }}
     >
       <Modal
@@ -88,14 +88,14 @@ export function Tweet(tweet: TweetProps): JSX.Element {
         open={open}
         closeModal={closeModal}
       >
-        <TweetReplyModal tweet={tweet} closeModal={closeModal} />
+        <TransmitReplyModal tweet={tweet} closeModal={closeModal} />
       </Modal>
       <Link href={tweetLink} scroll={!reply}>
         <a
           className={cn(
             `accent-tab hover-card relative flex flex-col 
              gap-y-4 px-4 py-3 outline-none duration-200`,
-            parentTweet
+            parentTransmit
               ? 'mt-0.5 pt-2.5 pb-0'
               : 'border-b border-light-border dark:border-dark-border'
           )}
@@ -104,18 +104,19 @@ export function Tweet(tweet: TweetProps): JSX.Element {
           <div className='grid grid-cols-[auto,1fr] gap-x-3 gap-y-1'>
             <AnimatePresence initial={false}>
               {modal ? null : pinned ? (
-                <TweetStatus type='pin'>
-                  <p className='text-sm font-bold'>Pinned Tweet</p>
-                </TweetStatus>
+                <TransmitStatus type='pin'>
+                  <p className='text-sm font-bold'>Pinned Transmit</p>
+                </TransmitStatus>
               ) : (
-                tweetIsRetweeted && (
-                  <TweetStatus type='tweet'>
+                tweetIsRetransmited && (
+                  <TransmitStatus type='tweet'>
                     <Link href={profileUsername as string}>
                       <a className='custom-underline truncate text-sm font-bold'>
-                        {userId === profileId ? 'You' : profileName} Retweeted
+                        {userId === profileId ? 'You' : profileName}{' '}
+                        Retransmited
                       </a>
                     </Link>
-                  </TweetStatus>
+                  </TransmitStatus>
                 )
               )}
             </AnimatePresence>
@@ -123,7 +124,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
               <UserTooltip avatar modal={modal} {...tweetUserData}>
                 <UserAvatar src={photoURL} alt={name} username={username} />
               </UserTooltip>
-              {parentTweet && (
+              {parentTransmit && (
                 <i className='hover-animation h-full w-0.5 bg-light-line-reply dark:bg-dark-line-reply' />
               )}
             </div>
@@ -141,11 +142,11 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                   <UserTooltip modal={modal} {...tweetUserData}>
                     <UserUsername username={username} />
                   </UserTooltip>
-                  <TweetDate tweetLink={tweetLink} createdAt={createdAt} />
+                  <TransmitDate tweetLink={tweetLink} createdAt={createdAt} />
                 </div>
                 <div className='px-4'>
                   {!modal && (
-                    <TweetActions
+                    <TransmitActions
                       isOwner={isOwner}
                       ownerId={ownerId}
                       tweetId={tweetId}
@@ -184,14 +185,14 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                   />
                 )}
                 {!modal && (
-                  <TweetStats
+                  <TransmitStats
                     reply={reply}
                     userId={userId}
                     isOwner={isOwner}
                     tweetId={tweetId}
                     userLikes={userLikes}
                     userReplies={userReplies}
-                    userRetweets={userRetweets}
+                    userRetransmits={userRetransmits}
                     openModal={!parent ? openModal : undefined}
                   />
                 )}

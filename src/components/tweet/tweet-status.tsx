@@ -4,12 +4,15 @@ import { CustomIcon } from '@components/ui/custom-icon';
 import { fromTop } from '@components/input/input-form';
 import type { ReactNode } from 'react';
 
-type TweetStatusProps = {
+type TransmitStatusProps = {
   type: 'pin' | 'tweet';
   children: ReactNode;
 };
 
-export function TweetStatus({ type, children }: TweetStatusProps): JSX.Element {
+export function TransmitStatus({
+  type,
+  children
+}: TransmitStatusProps): JSX.Element {
   return (
     <motion.div
       className='col-span-2 grid grid-cols-[48px,1fr] gap-3 text-light-secondary dark:text-dark-secondary'

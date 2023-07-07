@@ -2,7 +2,7 @@ import type { Timestamp, FirestoreDataConverter } from 'firebase/firestore';
 import type { ImagesPreview } from './file';
 import type { User } from './user';
 
-export type Tweet = {
+export type Transmit = {
   id: string;
   text: string | null;
   images: ImagesPreview | null;
@@ -12,12 +12,12 @@ export type Tweet = {
   createdAt: Timestamp;
   updatedAt: Timestamp | null;
   userReplies: number;
-  userRetweets: string[];
+  userRetransmits: string[];
 };
 
-export type TweetWithUser = Tweet & { user: User };
+export type TransmitWithUser = Transmit & { user: User };
 
-export const tweetConverter: FirestoreDataConverter<Tweet> = {
+export const tweetConverter: FirestoreDataConverter<Transmit> = {
   toFirestore(tweet) {
     return { ...tweet };
   },
@@ -25,6 +25,6 @@ export const tweetConverter: FirestoreDataConverter<Tweet> = {
     const { id } = snapshot;
     const data = snapshot.data(options);
 
-    return { id, ...data } as Tweet;
+    return { id, ...data } as Transmit;
   }
 };

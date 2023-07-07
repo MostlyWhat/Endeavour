@@ -14,7 +14,7 @@ import type { ImagesPreview, ImageData } from '@lib/types/file';
 
 type ImagePreviewProps = {
   tweet?: boolean;
-  viewTweet?: boolean;
+  viewTransmit?: boolean;
   previewCount: number;
   imagesPreview: ImagesPreview;
   removeImage?: (targetId: string) => () => void;
@@ -42,7 +42,7 @@ const postImageBorderRadius: Readonly<PostImageBorderRadius> = {
 
 export function ImagePreview({
   tweet,
-  viewTweet,
+  viewTransmit,
   previewCount,
   imagesPreview,
   removeImage
@@ -76,29 +76,29 @@ export function ImagePreview({
     setSelectedIndex(nextIndex);
   };
 
-  const isTweet = tweet ?? viewTweet;
+  const isTransmit = tweet ?? viewTransmit;
 
   return (
     <div
       className={cn(
         'grid grid-cols-2 grid-rows-2 rounded-2xl',
-        viewTweet
+        viewTransmit
           ? 'h-[51vw] xs:h-[42vw] md:h-[305px]'
           : 'h-[42vw] xs:h-[37vw] md:h-[271px]',
-        isTweet ? 'mt-2 gap-0.5' : 'gap-3'
+        isTransmit ? 'mt-2 gap-0.5' : 'gap-3'
       )}
     >
       <Modal
         modalClassName={cn(
           'flex justify-center w-full items-center relative',
-          isTweet && 'h-full'
+          isTransmit && 'h-full'
         )}
         open={open}
         closeModal={closeModal}
         closePanelOnClick
       >
         <ImageModal
-          tweet={isTweet}
+          tweet={isTransmit}
           imageData={selectedImage as ImageData}
           previewCount={previewCount}
           selectedIndex={selectedIndex}
@@ -111,7 +111,7 @@ export function ImagePreview({
             type='button'
             className={cn(
               'accent-tab relative transition-shadow',
-              isTweet
+              isTransmit
                 ? postImageBorderRadius[previewCount][index]
                 : 'rounded-2xl',
               {
@@ -122,14 +122,14 @@ export function ImagePreview({
             )}
             {...variants}
             onClick={preventBubbling(handleSelectedImage(index))}
-            layout={!isTweet ? true : false}
+            layout={!isTransmit ? true : false}
             key={id}
           >
             <NextImage
               className='relative h-full w-full cursor-pointer transition 
                          hover:brightness-75 hover:duration-200'
               imgClassName={cn(
-                isTweet
+                isTransmit
                   ? postImageBorderRadius[previewCount][index]
                   : 'rounded-2xl'
               )}
@@ -137,7 +137,7 @@ export function ImagePreview({
               layout='fill'
               src={src}
               alt={alt}
-              useSkeleton={isTweet}
+              useSkeleton={isTransmit}
             />
             {removeImage && (
               <Button

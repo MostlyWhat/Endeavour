@@ -1,16 +1,16 @@
 import { Input } from '@components/input/input';
-import { Tweet } from '@components/tweet/tweet';
-import type { TweetProps } from '@components/tweet/tweet';
+import { Transmit } from '@components/tweet/tweet';
+import type { TransmitProps } from '@components/tweet/tweet';
 
-type TweetReplyModalProps = {
-  tweet: TweetProps;
+type TransmitReplyModalProps = {
+  tweet: TransmitProps;
   closeModal: () => void;
 };
 
-export function TweetReplyModal({
+export function TransmitReplyModal({
   tweet,
   closeModal
-}: TweetReplyModalProps): JSX.Element {
+}: TransmitReplyModalProps): JSX.Element {
   return (
     <Input
       modal
@@ -18,7 +18,7 @@ export function TweetReplyModal({
       parent={{ id: tweet.id, username: tweet.user.username }}
       closeModal={closeModal}
     >
-      <Tweet modal parentTweet {...tweet} />
+      <Transmit modal parentTransmit {...tweet} />
     </Input>
   );
 }

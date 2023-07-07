@@ -18,7 +18,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { db, storage } from './app';
 import {
   usersCollection,
-  tweetsCollection,
+  transmitsCollection,
   userStatsCollection,
   userBookmarksCollection
 } from './collections';
@@ -74,7 +74,7 @@ export async function updateUsername(
   });
 }
 
-export async function managePinnedTweet(
+export async function managePinnedTransmit(
   type: 'pin' | 'unpin',
   userId: string,
   tweetId: string
@@ -82,7 +82,7 @@ export async function managePinnedTweet(
   const userRef = doc(usersCollection, userId);
   await updateDoc(userRef, {
     updatedAt: serverTimestamp(),
-    pinnedTweet: type === 'pin' ? tweetId : null
+    pinnedTransmit: type === 'pin' ? tweetId : null
   });
 }
 
@@ -119,8 +119,8 @@ export async function manageFollow(
   await batch.commit();
 }
 
-export async function removeTweet(tweetId: string): Promise<void> {
-  const userRef = doc(tweetsCollection, tweetId);
+export async function removeTransmit(tweetId: string): Promise<void> {
+  const userRef = doc(transmitsCollection, tweetId);
   await deleteDoc(userRef);
 }
 
@@ -156,7 +156,7 @@ export async function manageReply(
   type: 'increment' | 'decrement',
   tweetId: string
 ): Promise<void> {
-  const tweetRef = doc(tweetsCollection, tweetId);
+  const tweetRef = doc(transmitsCollection, tweetId);
 
   try {
     await updateDoc(tweetRef, {
@@ -168,13 +168,13 @@ export async function manageReply(
   }
 }
 
-export async function manageTotalTweets(
+export async function manageTotalTransmits(
   type: 'increment' | 'decrement',
   userId: string
 ): Promise<void> {
   const userRef = doc(usersCollection, userId);
   await updateDoc(userRef, {
-    totalTweets: increment(type === 'increment' ? 1 : -1),
+    totalTransmits: increment(type === 'increment' ? 1 : -1),
     updatedAt: serverTimestamp()
   });
 }
@@ -190,33 +190,33 @@ export async function manageTotalPhotos(
   });
 }
 
-export function manageRetweet(
-  type: 'retweet' | 'unretweet',
+export function manageRetransmit(
+  type: 'retransmit' | 'unretransmit',
   userId: string,
   tweetId: string
 ) {
   return async (): Promise<void> => {
     const batch = writeBatch(db);
 
-    const tweetRef = doc(tweetsCollection, tweetId);
+    const tweetRef = doc(transmitsCollection, tweetId);
     const userStatsRef = doc(userStatsCollection(userId), 'stats');
 
-    if (type === 'retweet') {
+    if (type === 'retransmit') {
       batch.update(tweetRef, {
-        userRetweets: arrayUnion(userId),
+        userRetransmits: arrayUnion(userId),
         updatedAt: serverTimestamp()
       });
       batch.update(userStatsRef, {
-        tweets: arrayUnion(tweetId),
+        transmits: arrayUnion(tweetId),
         updatedAt: serverTimestamp()
       });
     } else {
       batch.update(tweetRef, {
-        userRetweets: arrayRemove(userId),
+        userRetransmits: arrayRemove(userId),
         updatedAt: serverTimestamp()
       });
       batch.update(userStatsRef, {
-        tweets: arrayRemove(tweetId),
+        transmits: arrayRemove(tweetId),
         updatedAt: serverTimestamp()
       });
     }
@@ -234,7 +234,7 @@ export function manageLike(
     const batch = writeBatch(db);
 
     const userStatsRef = doc(userStatsCollection(userId), 'stats');
-    const tweetRef = doc(tweetsCollection, tweetId);
+    const tweetRef = doc(transmitsCollection, tweetId);
 
     if (type === 'like') {
       batch.update(tweetRef, {

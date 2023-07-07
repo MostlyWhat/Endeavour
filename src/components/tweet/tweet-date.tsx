@@ -2,30 +2,30 @@ import Link from 'next/link';
 import cn from 'clsx';
 import { formatDate } from '@lib/date';
 import { ToolTip } from '@components/ui/tooltip';
-import type { Tweet } from '@lib/types/tweet';
+import type { Transmit } from '@lib/types/tweet';
 
-type TweetDateProps = Pick<Tweet, 'createdAt'> & {
+type TransmitDateProps = Pick<Transmit, 'createdAt'> & {
   tweetLink: string;
-  viewTweet?: boolean;
+  viewTransmit?: boolean;
 };
 
-export function TweetDate({
+export function TransmitDate({
   createdAt,
   tweetLink,
-  viewTweet
-}: TweetDateProps): JSX.Element {
+  viewTransmit
+}: TransmitDateProps): JSX.Element {
   return (
-    <div className={cn('flex gap-1', viewTweet && 'py-4')}>
-      {!viewTweet && <i>·</i>}
+    <div className={cn('flex gap-1', viewTransmit && 'py-4')}>
+      {!viewTransmit && <i>·</i>}
       <div className='group relative'>
         <Link href={tweetLink}>
           <a
             className={cn(
               'custom-underline peer whitespace-nowrap',
-              viewTweet && 'text-light-secondary dark:text-dark-secondary'
+              viewTransmit && 'text-light-secondary dark:text-dark-secondary'
             )}
           >
-            {formatDate(createdAt, viewTweet ? 'full' : 'tweet')}
+            {formatDate(createdAt, viewTransmit ? 'full' : 'tweet')}
           </a>
         </Link>
         <ToolTip

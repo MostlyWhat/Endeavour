@@ -51,10 +51,10 @@ export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
               </div>
             </div>
             <p className='whitespace-pre-line break-words'>
-              At the heart of Endeavour are short messages called Tweets — just
-              like this one — which can include photos, videos, links, text,
-              hashtags, and mentions like{' '}
-              <span className='text-main-accent'>@twitter</span>.
+              At the heart of Endeavour are short messages called Transmits —
+              just like this one — which can include photos, videos, links,
+              text, hashtags, and mentions like{' '}
+              <span className='text-main-accent'>@MostlyWhat</span>.
             </p>
           </div>
         </div>
