@@ -1,14 +1,10 @@
-<br />
+# Endeavour
 
-![](/.github/assets/presentation.png)
+Introducing Endeavour, a social media inspired by Twitter and built with Next.js + TypeScript + Tailwind CSS using Cloud Firestore and Storage.
 
-<p align="center">
-  Endeavour built in Next.js + TypeScript + Tailwind CSS using Cloud Firestore and Storage
-</p>
+## Preview 📸
 
-## Preview 🎬
-
-https://user-images.githubusercontent.com/55032197/201472767-9db0177a-79b5-4913-8666-1744102b0ad7.mp4
+You can see the live demo [here](https://endeavour.mostlywhat.com).
 
 ## Features ✨
 
@@ -45,7 +41,7 @@ Here are the steps to run the project locally.
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/ccrsxx/twitter-clone.git
+   git clone https://github.com/mostlywhat/endeavour.git
    ```
 
 1. Install dependencies
@@ -76,16 +72,10 @@ Here are the steps to run the project locally.
    firebase login
    ```
 
-1. Get your project ID
+1. Use the project ID
 
    ```bash
-   firebase projects:list
-   ```
-
-1. Select your project ID
-
-   ```bash
-   firebase use your-project-id
+   firebase use mostlywhat-systems-endeavour
    ```
 
 1. Deploy Firestore rules, Firestore indexes, and Cloud Storage rules
@@ -102,7 +92,10 @@ Here are the steps to run the project locally.
 
 > **_Note_**: When you deploy Firestore indexes rules, it might take a few minutes to complete. So before the indexes are enabled, you will get an error when you fetch the data from Firestore.<br><br>You can check the status of your Firestore indexes with the link below, replace `your-project-id` with your project ID: https://console.firebase.google.com/u/0/project/your-project-id/firestore/indexes
 
-Optional:
+## Deployment 🚀
 
-- If you want to get trending data from Twitter API, you need to create a Twitter developer account and get your API keys. Then add your API keys to `.env.development`. I hope Elon Musk doesn't make this API paid 😅.
-- If you want to make the user stats synced with the deleted tweets, you need to enable the Cloud Functions for Firebase. Then deploy the Cloud Functions.
+The project is deployed on [Vercel](https://vercel.com).
+
+## License 📝
+
+This project is not licensed. See the [Terms and Conditions](https://endeavour.mostlywhat.com/legal/terms-and-conditions) for details.

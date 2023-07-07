@@ -1,7 +1,11 @@
 {
-  "name": "twitter-clone",
+  "name": "@mostlywhat/endeavour",
   "version": "1.0.0",
   "private": true,
+  "author": {
+    "name": "Mostly What",
+    "email": "admin@mostlywhat.com"
+  },
   "scripts": {
     "dev": "next dev -p 80",
     "build": "next build",

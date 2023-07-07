@@ -1,8 +1,9 @@
 const footerLinks = [
-  ['About', 'https://about.twitter.com'],
-  ['Privacy Policy', 'https://twitter.com/tos'],
-  ['Cookie Policy', 'https://support.twitter.com/articles/20170514'],
-  ['Terms of Service', 'https://twitter.com/privacy']
+  ['About', '/legal/about'],
+  ['Privacy Policy', '/legal/privacy-policy'],
+  ['Cookie Policy', '/legal/cookie-policy'],
+  ['Terms of Service', '/legal/terms-of-service'],
+  ['Open Source Licenses', '/legal/open-source-licenses']
 ] as const;
 
 export function LoginFooter(): JSX.Element {
