@@ -1,7 +1,6 @@
 import { toast } from 'react-hot-toast';
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
-import { clearAllBookmarks } from '@lib/firebase/utils';
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
@@ -23,14 +22,15 @@ export default function Bookmarks(): JSX.Element {
   const userId = user?.id as string;
 
   const handleReport = async (): Promise<void> => {
-    await clearAllBookmarks(userId);
+    // Open Github Issues Page
+    window.open('https://endeavour.mostlywhat.com/report', '_blank').focus();
     closeModal();
-    toast.success('Successfully cleared all bookmarks');
+    toast.success('Successfully Redirected to Report Page.');
   };
 
   return (
     <MainContainer>
-      <SEO title='Bookmarks / Endeavour' />
+      <SEO title='Updates / Endeavour' />
       <Modal
         modalClassName='max-w-xs bg-main-background w-full p-8 rounded-2xl'
         open={open}
@@ -38,7 +38,7 @@ export default function Bookmarks(): JSX.Element {
       >
         <ActionModal
           title='Report Issues?'
-          description='This can’t be undone and you’ll remove all Transmits you’ve added to your Bookmarks.'
+          description='This will take you to the Report page. Are you sure you want to continue?'
           mainBtnClassName='bg-accent-red hover:bg-accent-red/90 active:bg-accent-red/75 accent-tab 
                             focus-visible:bg-accent-red/90'
           mainBtnLabel='Report'

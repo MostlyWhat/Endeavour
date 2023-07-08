@@ -9,7 +9,7 @@ export default function Login(): JSX.Element {
     <div className='grid min-h-screen grid-rows-[1fr,auto]'>
       <SEO
         title='Endeavour - Communicate Freely about your Endeavours'
-        description='From breaking news and entertainment to sports and politics, get the full story with all the live commentary.'
+        description='From Earth to the Stars, Explore the Boundless Frontiers of the Universe.'
       />
       <LoginMain />
       <LoginFooter />
