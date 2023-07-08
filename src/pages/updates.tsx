@@ -1,5 +1,4 @@
 import { toast } from 'react-hot-toast';
-import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
@@ -15,17 +14,17 @@ import { HeroIcon } from '@components/ui/hero-icon';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function Bookmarks(): JSX.Element {
-  const { user } = useAuth();
-
   const { open, openModal, closeModal } = useModal();
 
-  const userId = user?.id as string;
-
-  const handleReport = async (): Promise<void> => {
+  const handleReport = (): void => {
     // Open Github Issues Page
-    window.open('https://endeavour.mostlywhat.com/report', '_blank').focus();
-    closeModal();
-    toast.success('Successfully Redirected to Report Page.');
+    const url = 'https://endeavour.mostlywhat.com/report';
+    const newWindow = window.open(url, '_blank');
+    if (newWindow) {
+      newWindow.focus();
+      closeModal();
+      toast.success('Successfully Redirected to Report Page.');
+    } else toast.error('Failed to open report page.');
   };
 
   return (
