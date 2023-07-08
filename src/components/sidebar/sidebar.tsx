@@ -29,7 +29,6 @@ const navLinks: Readonly<NavLink[]> = [
     href: '/explore',
     linkName: 'Explore',
     iconName: 'HashtagIcon',
-    disabled: true,
     canBeHidden: true
   },
   {
