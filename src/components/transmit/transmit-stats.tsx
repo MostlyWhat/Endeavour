@@ -23,7 +23,7 @@ type TransmitStatsProps = Pick<
 export function TransmitStats({
   reply,
   userId,
-  isOwner,
+  // isOwner,
   transmitId,
   userLikes,
   viewTransmit,
