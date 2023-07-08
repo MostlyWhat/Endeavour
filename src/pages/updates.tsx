@@ -1,5 +1,6 @@
 import { toast } from 'react-hot-toast';
 import { useState, type ReactElement, type ReactNode, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { useModal } from '@lib/hooks/useModal';
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
@@ -18,16 +19,28 @@ type Release = {
   name: string;
   body: string;
   published_at: string;
+  tag_name: string;
+};
+
+type Contributor = {
+  login: string;
+  contributions: number;
+  html_url: string;
 };
 
 export default function Updates(): JSX.Element {
   const { open, openModal, closeModal } = useModal();
   const [releases, setReleases] = useState<Release[]>([]);
+  const [contributors, setContributors] = useState<Contributor[]>([]);
 
   useEffect(() => {
     void fetch('https://api.github.com/repos/MostlyWhat/endeavour/releases')
       .then((response) => response.json())
       .then((data: Release[]) => setReleases(data));
+
+    void fetch('https://api.github.com/repos/MostlyWhat/endeavour/contributors')
+      .then((response) => response.json())
+      .then((data: Contributor[]) => setContributors(data));
   }, []);
 
   const handleReport = (): void => {
@@ -88,16 +101,49 @@ export default function Updates(): JSX.Element {
               className='group flex flex-col space-y-2 border-y border-light-border p-4 hover:bg-gray-100 dark:border-dark-border dark:hover:bg-gray-700'
             >
               <div className='flex flex-col space-y-1'>
-                <h3 className='text-xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400'>
+                <h1 className='text-4xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400'>
                   {release.name}
+                </h1>
+                <br />
+                <h3 className='text-xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400'>
+                  Information
                 </h3>
                 <p className='text-sm text-gray-500 dark:text-gray-400'>
-                  {release.body}
+                  <span className='font-bold'>Version: </span>
+                  {release.tag_name}
                 </p>
-              </div>
-              <div className='flex justify-between'>
                 <p className='text-sm text-gray-500 dark:text-gray-400'>
-                  {new Date(release.published_at).toLocaleDateString()}
+                  <span className='font-bold'>Released on: </span>
+                  {new Date(release.published_at).toLocaleDateString('en-GB', {
+                    weekday: 'long',
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                  })}
+                </p>
+                <br />
+                <h3 className='text-xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400'>
+                  Contributors
+                </h3>
+                <p className='text-sm text-gray-500 dark:text-gray-400'>
+                  {contributors.map((contributor, index) => (
+                    <a
+                      href={contributor.html_url}
+                      key={index}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400'
+                    >
+                      {contributor.login} (Commits: {contributor.contributions})
+                    </a>
+                  ))}
+                </p>
+                <br />
+                <h3 className='text-xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400'>
+                  Changelog
+                </h3>
+                <p className='text-sm text-gray-500 dark:text-gray-400'>
+                  <ReactMarkdown>{release.body}</ReactMarkdown>
                 </p>
               </div>
             </a>
