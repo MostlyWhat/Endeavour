@@ -15,7 +15,7 @@ export default function Updates(): JSX.Element {
       <SEO title='Explore / Endeavour' />
       <MainHeader className='flex items-center justify-between'>
         <div className='-mb-1 flex flex-col'>
-          <h2 className='-mt-1 text-xl font-bold'>Explore</h2>
+          <h2 className='-mt-1 text-xl font-bold'>Search</h2>
         </div>
         <Button
           className='dark-bg-tab group relative p-2 hover:bg-light-primary/10
@@ -32,8 +32,8 @@ export default function Updates(): JSX.Element {
       </MainHeader>
       <section className='mt-0.5'>
         <StatsEmpty
-          title='Explore is being added soon.'
-          description='Explore is a place to discover new content and creators.'
+          title='Search is being added soon.'
+          description='Search is a place to search for content and creators'
           imageData={{ src: '/assets/no-bookmarks.png', alt: 'No Updates' }}
         />
       </section>
