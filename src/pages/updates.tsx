@@ -98,7 +98,7 @@ export default function Updates(): JSX.Element {
               key={index}
               target='_blank'
               rel='noopener noreferrer'
-              className='group flex flex-col space-y-2 border-y border-light-border p-4 hover:bg-gray-100 dark:border-dark-border dark:hover:bg-gray-700'
+              className='transition-200 group flex flex-col space-y-2 border-y border-light-border p-4 transition-colors hover:bg-gray-100 dark:border-dark-border dark:hover:bg-gray-700'
             >
               <div className='flex flex-col space-y-1'>
                 <h1 className='text-4xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400'>
