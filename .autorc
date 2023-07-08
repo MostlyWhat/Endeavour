@@ -1,0 +1,12 @@
+{
+  "owner": "MostlyWhat",
+  "repo": "Endeavour",
+  "name": "MostlyWhat",
+  "email": "admin@mostlywhat.com",
+  "onlyPublishWithReleaseLabel": true,
+  "prereleaseBranches": [
+    "alpha",
+    "beta",
+    "next"
+  ]
+}
