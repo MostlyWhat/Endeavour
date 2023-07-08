@@ -135,7 +135,7 @@ export function ImageModal({
               rel='noreferrer'
               onClick={preventBubbling(null, true)}
             >
-              Open original
+              Open Original
             </a>
           </motion.div>
         )}
