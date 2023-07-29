@@ -80,6 +80,8 @@ export function AuthContextProvider({
 
         const userData: WithFieldValue<User> = {
           id: uid,
+          email: '',
+          password: '',
           bio: null,
           name: displayName as string,
           theme: null,
