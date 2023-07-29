@@ -48,7 +48,10 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
     website,
     photoURL,
     location,
-    coverPhotoURL
+    coverPhotoURL,
+    username: user?.username ?? '',
+    email: user?.email ?? '',
+    password: ''
   });
 
   const [userImages, setUserImages] = useState<UserImages>({
@@ -172,6 +175,7 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
 
   const resetUserEditData = (): void =>
     setEditUserData({
+      ...editUserData,
       bio,
       name,
       website,
