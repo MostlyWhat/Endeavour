@@ -1,13 +1,24 @@
 import { useAuth } from '@lib/context/auth-context';
+import { useModal } from '@lib/hooks/useModal';
 import { NextImage } from '@components/ui/next-image';
 import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
+import { Modal } from '@components/modal/modal';
+import { SignInModal } from '@components/modal/signin-modal';
 
 export function LoginMain(): JSX.Element {
   const { signInWithGoogle } = useAuth();
+  const { open, openModal, closeModal } = useModal();
 
   return (
     <main className='grid lg:grid-cols-[1fr,45vw]'>
+      <Modal
+        modalClassName='max-w-xl bg-main-background w-full p-8 rounded-2xl hover-animation'
+        open={open}
+        closeModal={closeModal}
+      >
+        <SignInModal closeModal={closeModal} />
+      </Modal>
       <div className='relative hidden items-center justify-center  lg:flex'>
         <NextImage
           imgClassName='object-cover'
@@ -54,17 +65,11 @@ export function LoginMain(): JSX.Element {
               className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
                          transition hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0
                          dark:bg-white dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
+              // onClick={signInWithGitHub}
             >
               <CustomIcon iconName='GitHubIcon' /> Sign up with GitHub
             </Button>
-            <Button
-              className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
-                         transition hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0
-                         dark:bg-white dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
-            >
-              <CustomIcon iconName='DiscordIcon' /> Sign up with Discord
-            </Button>
-            {/* <div className='grid w-full grid-cols-[1fr,auto,1fr] items-center gap-2'>
+            <div className='grid w-full grid-cols-[1fr,auto,1fr] items-center gap-2'>
               <i className='border-b border-light-border dark:border-dark-border' />
               <p>or</p>
               <i className='border-b border-light-border dark:border-dark-border' />
@@ -74,7 +79,7 @@ export function LoginMain(): JSX.Element {
                          focus-visible:!ring-accent-blue/80 focus-visible:brightness-90 active:brightness-75'
             >
               Sign up with phone or email
-            </Button> */}
+            </Button>
             <p
               className='inner:custom-underline inner:custom-underline text-center text-xs
                          text-light-secondary inner:text-accent-blue dark:text-dark-secondary'
@@ -100,7 +105,8 @@ export function LoginMain(): JSX.Element {
               className='border border-light-line-reply font-bold text-accent-blue hover:bg-accent-blue/10
                          focus-visible:bg-accent-blue/10 focus-visible:!ring-accent-blue/80 active:bg-accent-blue/20
                          dark:border-light-secondary'
-              onClick={signInWithGoogle}
+              // onClick={signInWithGoogle}
+              onClick={openModal}
             >
               Sign in
             </Button>

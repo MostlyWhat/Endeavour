@@ -10,6 +10,8 @@ export type User = {
   website: string | null;
   location: string | null;
   username: string;
+  email: string;
+  password: string;
   photoURL: string;
   verified: boolean;
   following: string[];
@@ -24,7 +26,15 @@ export type User = {
 
 export type EditableData = Extract<
   keyof User,
-  'bio' | 'name' | 'website' | 'photoURL' | 'location' | 'coverPhotoURL'
+  | 'bio'
+  | 'name'
+  | 'website'
+  | 'photoURL'
+  | 'location'
+  | 'coverPhotoURL'
+  | 'email'
+  | 'username'
+  | 'password'
 >;
 
 export type EditableUserData = Pick<User, EditableData>;

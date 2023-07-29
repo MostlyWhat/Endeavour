@@ -21,7 +21,7 @@ export function LoginFooter(): JSX.Element {
             {linkName}
           </a>
         ))}
-        <p>© 2022 MostlyWhat Systems</p>
+        <p>© 2023 MostlyWhat Systems</p>
       </nav>
     </footer>
   );

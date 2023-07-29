@@ -2,8 +2,10 @@ import { useState, useEffect, useContext, createContext, useMemo } from 'react';
 import {
   signInWithPopup,
   GoogleAuthProvider,
+  GithubAuthProvider,
   onAuthStateChanged,
-  signOut as signOutFirebase
+  signOut as signOutFirebase,
+  signInWithEmailAndPassword
 } from 'firebase/auth';
 import {
   doc,
@@ -35,6 +37,8 @@ type AuthContext = {
   userBookmarks: Bookmark[] | null;
   signOut: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
+  signInWithGitHub: () => Promise<void>;
+  signInWithEmail: (email: string, password: string) => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContext | null>(null);
@@ -166,6 +170,26 @@ export function AuthContextProvider({
     }
   };
 
+  const signInWithGitHub = async (): Promise<void> => {
+    try {
+      const provider = new GithubAuthProvider();
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      setError(error as Error);
+    }
+  };
+
+  const signInWithEmail = async (
+    email: string,
+    password: string
+  ): Promise<void> => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      setError(error as Error);
+    }
+  };
+
   const signOut = async (): Promise<void> => {
     try {
       await signOutFirebase(auth);
@@ -174,7 +198,7 @@ export function AuthContextProvider({
     }
   };
 
-  const isAdmin = user ? user.username === 'ccrsxx' : false;
+  const isAdmin = user ? user.username === 'MostlyWhat' : false;
   const randomSeed = useMemo(getRandomId, [user?.id]);
 
   const value: AuthContext = {
@@ -185,7 +209,9 @@ export function AuthContextProvider({
     randomSeed,
     userBookmarks,
     signOut,
-    signInWithGoogle
+    signInWithGoogle,
+    signInWithGitHub,
+    signInWithEmail
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
