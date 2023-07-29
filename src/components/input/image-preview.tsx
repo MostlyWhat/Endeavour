@@ -85,8 +85,7 @@ export function ImagePreview({
         viewTransmit
           ? 'h-[51vw] xs:h-[42vw] md:h-[305px]'
           : 'h-[42vw] xs:h-[37vw] md:h-[271px]',
-        isTransmit ? 'mt-2 gap-0.5' : 'gap-3',
-        'overflow-hidden' // Add 'overflow-hidden' class to the container
+        isTransmit ? 'mt-2 gap-0.5' : 'gap-3'
       )}
     >
       <Modal
@@ -108,7 +107,8 @@ export function ImagePreview({
       </Modal>
       <AnimatePresence mode='popLayout'>
         {imagesPreview.map(({ id, src, alt }, index) => (
-          <motion.div // Change button to div
+          <motion.button
+            type='button'
             className={cn(
               'accent-tab relative transition-shadow',
               isTransmit
@@ -127,7 +127,7 @@ export function ImagePreview({
           >
             <NextImage
               className='relative h-full w-full cursor-pointer transition 
-             hover:brightness-75 hover:duration-200'
+                         hover:brightness-75 hover:duration-200'
               imgClassName={cn(
                 isTransmit
                   ? postImageBorderRadius[previewCount][index]
@@ -150,7 +150,7 @@ export function ImagePreview({
                 <ToolTip className='translate-y-2' tip='Remove' />
               </Button>
             )}
-          </motion.div> // Change button to div
+          </motion.button>
         ))}
       </AnimatePresence>
     </div>

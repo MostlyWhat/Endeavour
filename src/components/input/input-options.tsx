@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useModal } from '@lib/hooks/useModal';
 import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { ToolTip } from '@components/ui/tooltip';
+import { GifModal } from '@components/modal/gif-modal';
 import { variants } from './input';
 import { ProgressBar } from './progress-bar';
 import type { ChangeEvent, ClipboardEvent } from 'react';
@@ -24,7 +26,7 @@ const options: Readonly<Options> = [
   {
     name: 'GIF',
     iconName: 'GifIcon',
-    disabled: true
+    disabled: false
   },
   {
     name: 'Poll',
