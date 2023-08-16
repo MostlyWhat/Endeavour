@@ -82,7 +82,7 @@ export function GifModal({
               </Button>
               {gifUrl && (
                 <Button
-                  className='group/inner absolute top-2 right-2 bg-image-preview-hover/50 p-2 focus-visible:bg-image-preview-hover/50'
+                  className='group/inner absolute right-2 top-2 bg-image-preview-hover/50 p-2 focus-visible:bg-image-preview-hover/50'
                   // onClick={removeGif}
                 >
                   <CustomIcon
@@ -102,7 +102,7 @@ export function GifModal({
           </div>
           {/* Button to select the GIF */}
           <Button
-            className='bg-light-primary py-1 px-4 font-bold text-white focus-visible:bg-light-primary/90 enabled:hover:bg-light-primary/90 enabled:active:bg-light-primary/80 disabled:brightness-75 dark:bg-light-border dark:text-light-primary dark:focus-visible:bg-light-border/90 dark:enabled:hover:bg-light-border/90 dark:enabled:active:bg-light-border/75'
+            className='bg-light-primary px-4 py-1 font-bold text-white focus-visible:bg-light-primary/90 enabled:hover:bg-light-primary/90 enabled:active:bg-light-primary/80 disabled:brightness-75 dark:bg-light-border dark:text-light-primary dark:focus-visible:bg-light-border/90 dark:enabled:hover:bg-light-border/90 dark:enabled:active:bg-light-border/75'
             onClick={handleGifSelection}
           >
             <CustomIcon

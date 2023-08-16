@@ -149,11 +149,11 @@ export function MobileSidebarModal({
             <div className='h-full rounded-md bg-light-line-reply dark:bg-dark-line-reply' />
           )}
         </Link>
-        <div className='mb-8 ml-2 -mt-4'>
+        <div className='-mt-4 mb-8 ml-2'>
           <UserAvatar
             className='absolute -translate-y-1/2 bg-main-background p-1 hover:brightness-100
-                     [&>figure>span]:[transition:200ms]
-                     [&:hover>figure>span]:brightness-75'
+                     [&:hover>figure>span]:brightness-75
+                     [&>figure>span]:[transition:200ms]'
             username={username}
             src={photoURL}
             alt={name}
