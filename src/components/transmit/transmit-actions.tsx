@@ -288,7 +288,7 @@ export function TransmitActions({
                       )}
                     >
                       <HeroIcon iconName='UserMinusIcon' />
-                      Unfollow @{username}
+                      Untrack @{username}
                     </Popover.Button>
                   ) : (
                     <Popover.Button
@@ -299,7 +299,7 @@ export function TransmitActions({
                       )}
                     >
                       <HeroIcon iconName='UserPlusIcon' />
-                      Follow @{username}
+                      Track @{username}
                     </Popover.Button>
                   )}
                   {(isAdmin || isOwner) && (

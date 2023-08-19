@@ -8,12 +8,12 @@ export type User = {
   theme: Theme | null;
   accent: Accent | null;
   website: string | null;
+  job: string | null;
   location: string | null;
   username: string;
-  email: string;
-  password: string;
   photoURL: string;
   verified: boolean;
+  verifiedType: string | null;
   following: string[];
   followers: string[];
   createdAt: Timestamp;
@@ -32,9 +32,7 @@ export type EditableData = Extract<
   | 'photoURL'
   | 'location'
   | 'coverPhotoURL'
-  | 'email'
   | 'username'
-  | 'password'
 >;
 
 export type EditableUserData = Pick<User, EditableData>;

@@ -63,6 +63,7 @@ type MobileSidebarModalProps = Pick<
   | 'name'
   | 'username'
   | 'verified'
+  | 'verifiedType'
   | 'photoURL'
   | 'following'
   | 'followers'
@@ -75,6 +76,7 @@ export function MobileSidebarModal({
   name,
   username,
   verified,
+  verifiedType,
   photoURL,
   following,
   followers,
@@ -96,8 +98,8 @@ export function MobileSidebarModal({
   } = useModal();
 
   const allStats: Readonly<Stats[]> = [
-    ['following', 'Following', following.length],
-    ['followers', 'Followers', followers.length]
+    ['following', 'Tracking', following.length],
+    ['followers', 'Trackers', followers.length]
   ];
 
   const userLink = `/user/${username}`;
@@ -166,6 +168,7 @@ export function MobileSidebarModal({
               name={name}
               username={username}
               verified={verified}
+              verifiedType={verifiedType}
               className='-mb-1'
             />
             <UserUsername username={username} />

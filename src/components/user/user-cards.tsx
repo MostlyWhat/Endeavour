@@ -26,7 +26,7 @@ const allNoStatsData: Readonly<NoStatsData> = {
     title: 'Amplify Transmits you like',
     imageData: { src: '/assets/no-retransmits.png', alt: 'No retransmits' },
     description:
-      'Share someone else’s Transmit on your timeline by Retransmiting it. When you do, it’ll show up here.'
+      'Share other Exonaut’s Transmit on your timeline by Retransmiting it. When you do, it’ll show up here.'
   },
   likes: {
     title: 'No Transmit Likes yet',
@@ -36,13 +36,13 @@ const allNoStatsData: Readonly<NoStatsData> = {
   following: {
     title: 'Be in the know',
     description:
-      'Following accounts is an easy way to curate your timeline and know what’s happening with the topics and people you’re interested in.'
+      'Tracking accounts is an easy way to curate your timeline and know what’s happening with the topics and Exonauts you’re interested in.'
   },
   followers: {
     title: 'Looking for followers?',
     imageData: { src: '/assets/no-followers.png', alt: 'No followers' },
     description:
-      'When someone follows this account, they’ll show up here. Transmiting and interacting with others helps boost followers.'
+      'When someone tracks this account, they’ll show up here. Transmiting and interacting with others helps boost trackers.'
   }
 };
 

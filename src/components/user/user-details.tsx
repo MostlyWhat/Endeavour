@@ -14,8 +14,10 @@ type UserDetailsProps = Pick<
   | 'name'
   | 'website'
   | 'username'
+  | 'job'
   | 'location'
   | 'verified'
+  | 'verifiedType'
   | 'createdAt'
   | 'following'
   | 'followers'
@@ -29,8 +31,10 @@ export function UserDetails({
   name,
   website,
   username,
+  job,
   location,
   verified,
+  verifiedType,
   createdAt,
   following,
   followers
@@ -38,6 +42,7 @@ export function UserDetails({
   const detailIcons: Readonly<DetailIcon[]> = [
     [location, 'MapPinIcon'],
     [website, 'LinkIcon'],
+    [job, 'BriefcaseIcon'],
     [`Joined ${formatDate(createdAt, 'joined')}`, 'CalendarDaysIcon']
   ];
 
@@ -49,6 +54,7 @@ export function UserDetails({
           name={name}
           iconClassName='w-6 h-6'
           verified={verified}
+          verifiedType={verifiedType}
         />
         <div className='flex items-center gap-1 text-light-secondary dark:text-dark-secondary'>
           <p>@{username}</p>
@@ -74,7 +80,7 @@ export function UserDetails({
                     >
                       {detail}
                     </a>
-                  ) : index === 2 ? (
+                  ) : index === 3 ? (
                     <button className='custom-underline group relative'>
                       {detail}
                       <ToolTip

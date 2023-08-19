@@ -51,7 +51,14 @@ export function Transmit(transmit: TransmitProps): JSX.Element {
     user: transmitUserData
   } = transmit;
 
-  const { id: ownerId, name, username, verified, photoURL } = transmitUserData;
+  const {
+    id: ownerId,
+    name,
+    username,
+    verified,
+    verifiedType,
+    photoURL
+  } = transmitUserData;
 
   const { user } = useAuth();
 
@@ -137,6 +144,7 @@ export function Transmit(transmit: TransmitProps): JSX.Element {
                     name={name}
                     username={username}
                     verified={verified}
+                    verifiedType={verifiedType}
                     className='text-light-primary dark:text-dark-primary'
                   />
                 </UserTooltip>

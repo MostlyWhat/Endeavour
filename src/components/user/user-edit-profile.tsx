@@ -49,9 +49,7 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
     photoURL,
     location,
     coverPhotoURL,
-    username: user?.username ?? '',
-    email: user?.email ?? '',
-    password: ''
+    username: user?.username ?? ''
   });
 
   const [userImages, setUserImages] = useState<UserImages>({
