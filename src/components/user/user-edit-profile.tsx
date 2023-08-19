@@ -216,6 +216,12 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
       useTextArea: true
     },
     {
+      label: 'Job',
+      inputId: 'job',
+      inputValue: editUserData.job,
+      inputLimit: 50
+    },
+    {
       label: 'Location',
       inputId: 'location',
       inputValue: editUserData.location,

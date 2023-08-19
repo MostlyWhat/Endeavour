@@ -1,5 +1,3 @@
-import cn from 'clsx';
-
 import { HeroIcon } from '@components/ui/hero-icon';
 
 interface VerifiedBadgeProps {
@@ -23,15 +21,16 @@ export function VerifiedBadge({
   verifiedType,
   iconClass
 }: VerifiedBadgeProps): JSX.Element {
-  const fillClass = cn(
-    `fill-${badgeTypes[verifiedType as keyof typeof badgeTypes] || 'blue'}-500`
-  );
-
-  const badgeClass = cn(fillClass, iconClass ?? 'h-5 w-5');
+  const badgeColor = badgeTypes[verifiedType ?? ''] || 'blue';
+  const badgeClass = iconClass ?? 'h-5 w-5';
 
   return (
     <i>
-      <HeroIcon className={badgeClass} iconName='CheckBadgeIcon' solid />
+      <HeroIcon
+        className={`fill-${badgeColor}-500 ${badgeClass}`} // Note the updated class name
+        iconName='CheckBadgeIcon'
+        solid
+      />
     </i>
   );
 }
