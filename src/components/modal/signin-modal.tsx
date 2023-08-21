@@ -87,7 +87,7 @@ export function SignInModal({ closeModal }: SignInModalProps): JSX.Element {
           />
           <span>Sign in with GitHub</span>
         </Button>
-        <div className='grid w-full grid-cols-[1fr,auto,1fr] items-center gap-2'>
+        {/* <div className='grid w-full grid-cols-[1fr,auto,1fr] items-center gap-2'>
           <i className='border-b border-light-border dark:border-dark-border' />
           <p>or</p>
           <i className='border-b border-light-border dark:border-dark-border' />
@@ -115,7 +115,7 @@ export function SignInModal({ closeModal }: SignInModalProps): JSX.Element {
           >
             <span>Sign In</span>
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
