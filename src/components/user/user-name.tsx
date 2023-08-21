@@ -10,6 +10,7 @@ type UserNameProps = {
   username?: string;
   className?: string;
   iconClassName?: string;
+  showExplain?: boolean;
 };
 
 export function UserName({
@@ -19,7 +20,8 @@ export function UserName({
   verifiedType,
   username,
   className,
-  iconClassName
+  iconClassName,
+  showExplain
 }: UserNameProps): JSX.Element {
   const CustomTag = tag ? tag : 'p';
 
@@ -38,6 +40,7 @@ export function UserName({
         <VerifiedBadge
           verifiedType={verifiedType as string}
           iconClass={iconClassName}
+          showExplain={showExplain}
         />
       )}
     </Link>

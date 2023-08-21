@@ -29,7 +29,7 @@ export function UserFollow({ type }: UserFollowProps): JSX.Element {
   return (
     <>
       <SEO
-        title={`People ${
+        title={`Exonauts ${
           type === 'following' ? 'followed by' : 'following'
         } ${name} (@${username}) / Endeavour`}
       />

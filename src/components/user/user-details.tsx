@@ -1,7 +1,7 @@
 import { formatDate } from '@lib/date';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { ToolTip } from '@components/ui/tooltip';
-import { UserName } from './user-name';
+import { UserName } from './user-home-name';
 import { UserFollowing } from './user-following';
 import { UserFollowStats } from './user-follow-stats';
 import type { IconName } from '@components/ui/hero-icon';
@@ -55,6 +55,7 @@ export function UserDetails({
           iconClassName='w-6 h-6'
           verified={verified}
           verifiedType={verifiedType}
+          showExplain={true}
         />
         <div className='flex items-center gap-1 text-light-secondary dark:text-dark-secondary'>
           <p>@{username}</p>

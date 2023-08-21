@@ -35,19 +35,13 @@ const topNavLinks: Readonly<MobileNavLink[]> = [
     iconName: 'ArrowPathIcon'
   },
   {
-    href: '/people',
-    linkName: 'Endeavour Circle',
+    href: '/exonauts',
+    linkName: 'Exonauts',
     iconName: 'UserGroupIcon'
   }
 ];
 
 const bottomNavLinks: Readonly<MobileNavLink[]> = [
-  {
-    href: '/settings',
-    linkName: 'Settings and privacy',
-    iconName: 'Cog8ToothIcon',
-    disabled: true
-  },
   {
     href: '/help-center',
     linkName: 'Help center',

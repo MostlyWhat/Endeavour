@@ -52,7 +52,7 @@ export function TrendsLayout({ children }: LayoutProps): JSX.Element {
   );
 }
 
-export function PeopleLayout({ children }: LayoutProps): JSX.Element {
+export function ExonautsLayout({ children }: LayoutProps): JSX.Element {
   return (
     <>
       {children}

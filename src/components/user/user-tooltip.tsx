@@ -52,8 +52,8 @@ export function UserTooltip({
   const userLink = `/user/${username}`;
 
   const allStats: Readonly<Stats[]> = [
-    ['following', 'Following', following.length],
-    ['followers', 'Followers', followers.length]
+    ['following', 'Tracking', following.length],
+    ['followers', 'Trackers', followers.length]
   ];
 
   return (

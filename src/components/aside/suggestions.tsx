@@ -41,17 +41,17 @@ export function Suggestions(): JSX.Element {
         <Loading className='flex h-52 items-center justify-center p-4' />
       ) : suggestionsData ? (
         <motion.div className='inner:px-4 inner:py-3' {...variants}>
-          <h2 className='text-xl font-bold'>Recommended Users to Follow</h2>
+          <h2 className='text-xl font-bold'>Recommended Exonauts</h2>
           {adminData && <UserCard {...adminData} />}
           {suggestionsData?.map((userData) => (
             <UserCard {...userData} key={userData.id} />
           ))}
           <Link
-            href='/people'
+            href='/exonauts'
             className='custom-button accent-tab hover-card block w-full rounded-2xl
                        rounded-t-none text-center text-main-accent'
           >
-            Show more
+            Show More
           </Link>
         </motion.div>
       ) : (

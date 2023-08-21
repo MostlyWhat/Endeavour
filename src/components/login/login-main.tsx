@@ -4,7 +4,6 @@ import { NextImage } from '@components/ui/next-image';
 import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
 import { Modal } from '@components/modal/modal';
-import { SignInModal } from '@components/modal/signin-modal';
 
 export function LoginMain(): JSX.Element {
   const { signInWithGoogle } = useAuth();

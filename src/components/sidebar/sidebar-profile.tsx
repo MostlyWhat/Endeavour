@@ -7,7 +7,6 @@ import { Modal } from '@components/modal/modal';
 import { ActionModal } from '@components/modal/action-modal';
 import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
-import { CustomIcon } from '@components/ui/custom-icon';
 import { UserAvatar } from '@components/user/user-avatar';
 import { UserName } from '@components/user/user-name';
 import { UserUsername } from '@components/user/user-username';
@@ -68,7 +67,7 @@ export function SidebarProfile(): JSX.Element {
             <AnimatePresence>
               {open && (
                 <Menu.Items
-                  className='menu-container absolute -top-36 left-0 right-0 w-60 xl:w-full'
+                  className='menu-container absolute -top-48 left-0 right-0 w-60 xl:w-full'
                   as={motion.div}
                   {...variants}
                   static
@@ -101,6 +100,20 @@ export function SidebarProfile(): JSX.Element {
                     {({ active }): JSX.Element => (
                       <Button
                         className={cn(
+                          'flex w-full gap-3 rounded-md rounded-t-none border-b border-light-border p-4 px-4 py-3 dark:border-dark-border',
+                          active && 'bg-main-sidebar-background'
+                        )}
+                        onClick={openModal}
+                      >
+                        <HeroIcon iconName='Cog8ToothIcon' />
+                        Settings
+                      </Button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }): JSX.Element => (
+                      <Button
+                        className={cn(
                           'flex w-full gap-3 rounded-md rounded-t-none p-4',
                           active && 'bg-main-sidebar-background'
                         )}
@@ -111,17 +124,6 @@ export function SidebarProfile(): JSX.Element {
                       </Button>
                     )}
                   </Menu.Item>
-                  <i
-                    className='absolute -bottom-[10px] left-2 translate-x-1/2 rotate-180
-                               [filter:drop-shadow(#cfd9de_1px_-1px_1px)] 
-                               dark:[filter:drop-shadow(#333639_1px_-1px_1px)]
-                               xl:left-1/2 xl:-translate-x-1/2'
-                  >
-                    <CustomIcon
-                      className='h-4 w-6 fill-main-background'
-                      iconName='TriangleIcon'
-                    />
-                  </i>
                 </Menu.Items>
               )}
             </AnimatePresence>
