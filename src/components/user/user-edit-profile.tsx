@@ -39,7 +39,7 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
 
   const [loading, setLoading] = useState(false);
 
-  const { bio, name, website, location, photoURL, coverPhotoURL } =
+  const { bio, name, website, job, location, photoURL, coverPhotoURL } =
     user as User;
 
   const [editUserData, setEditUserData] = useState<EditableUserData>({
@@ -47,6 +47,7 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
     name,
     website,
     photoURL,
+    job,
     location,
     coverPhotoURL,
     username: user?.username ?? ''

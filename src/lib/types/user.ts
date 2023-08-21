@@ -30,6 +30,7 @@ export type EditableData = Extract<
   | 'name'
   | 'website'
   | 'photoURL'
+  | 'job'
   | 'location'
   | 'coverPhotoURL'
   | 'username'
