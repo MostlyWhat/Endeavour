@@ -12,8 +12,9 @@ export function VerifiedBadge({
   const verifiedTypes: Record<string, string> = {
     admin: 'fill-yellow-500',
     moderator: 'fill-red-500',
-    support: 'fill-color-300',
-    vip: 'fill-color-200'
+    developer: 'fill-blue-500',
+    contributor: 'fill-green-500',
+    supporter: 'fill-purple-500'
   };
 
   const fillColorClass: string =
