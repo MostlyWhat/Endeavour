@@ -35,12 +35,13 @@ const allNoStatsData: Readonly<NoStatsData> = {
   },
   following: {
     title: 'Be in the know',
+    imageData: { src: '/assets/no-followers.png', alt: 'No trackers' },
     description:
       'Tracking accounts is an easy way to curate your timeline and know what’s happening with the topics and Exonauts you’re interested in.'
   },
   followers: {
-    title: 'Looking for followers?',
-    imageData: { src: '/assets/no-followers.png', alt: 'No followers' },
+    title: 'Looking for trackers?',
+    imageData: { src: '/assets/no-followers.png', alt: 'No trackers' },
     description:
       'When someone tracks this account, they’ll show up here. Transmiting and interacting with others helps boost trackers.'
   }

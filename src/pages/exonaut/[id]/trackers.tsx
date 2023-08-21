@@ -6,7 +6,7 @@ import { UserFollow } from '@components/user/user-follow';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function UserFollowers(): JSX.Element {
-  return <UserFollow type='followers' />;
+  return <UserFollow type='trackers' />;
 }
 
 UserFollowers.getLayout = (page: ReactElement): ReactNode => (

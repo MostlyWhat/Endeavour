@@ -21,7 +21,7 @@ export function UserAvatar({
 
   return (
     <Link
-      href={username ? `/user/${username}` : '#'}
+      href={username ? `/exonaut/${username}` : '#'}
       className={cn(
         'blur-picture flex self-start',
         !username && 'pointer-events-none',

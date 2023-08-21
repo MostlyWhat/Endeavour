@@ -15,8 +15,8 @@ const allNavs = [
     { name: 'Likes', path: 'likes' }
   ],
   [
-    { name: 'Following', path: 'following' },
-    { name: 'Followers', path: 'followers' }
+    { name: 'Tracking', path: 'tracking' },
+    { name: 'Trackers', path: 'trackers' }
   ]
 ] as const;
 

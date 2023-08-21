@@ -42,7 +42,7 @@ export function UserFollowStats({
     query: { id }
   } = useRouter();
 
-  const userPath = `/user/${id as string}`;
+  const userPath = `/exonaut/${id as string}`;
 
   const allStats: Readonly<Stats[]> = [
     ['Tracking', `${userPath}/tracking`, followingMove, currentFollowing],

@@ -179,7 +179,7 @@ export function Transmit(transmit: TransmitProps): JSX.Element {
               >
                 Replying to{' '}
                 <Link
-                  href={`/user/${parentUsername}`}
+                  href={`/exonaut/${parentUsername}`}
                   className='custom-underline text-main-accent'
                 >
                   @{parentUsername}

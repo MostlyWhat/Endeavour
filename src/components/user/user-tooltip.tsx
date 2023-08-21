@@ -49,7 +49,7 @@ export function UserTooltip({
 
   if (isMobile || modal) return <>{children}</>;
 
-  const userLink = `/user/${username}`;
+  const userLink = `/exonaut/${username}`;
 
   const allStats: Readonly<Stats[]> = [
     ['following', 'Tracking', following.length],

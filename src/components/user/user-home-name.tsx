@@ -29,7 +29,7 @@ export function UserName({
     <>
       <div className='flow-root items-center gap-1'>
         <Link
-          href={username ? `/user/${username}` : '/toilet-paper'}
+          href={username ? `/exonaut/${username}` : '/toilet-paper'}
           className={cn(
             'float-left truncate font-bold',
             username ? 'custom-underline' : 'pointer-events-none',

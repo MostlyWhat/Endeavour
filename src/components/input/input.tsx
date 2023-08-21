@@ -222,7 +222,7 @@ export function Input({
         >
           Replying to{' '}
           <Link
-            href={`/user/${parent?.username as string}`}
+            href={`/exonaut/${parent?.username as string}`}
             className='custom-underline text-main-accent'
           >
             {parent?.username as string}

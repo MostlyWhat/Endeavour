@@ -27,7 +27,7 @@ export function UserName({
 
   return (
     <Link
-      href={username ? `/user/${username}` : '#'}
+      href={username ? `/exonaut/${username}` : '#'}
       className={cn(
         'flex items-center gap-1 truncate font-bold',
         username ? 'custom-underline' : 'pointer-events-none',

@@ -126,7 +126,7 @@ export function ViewTransmit(transmit: ViewTransmitProps): JSX.Element {
         <p className='text-light-secondary dark:text-dark-secondary'>
           Replying to{' '}
           <Link
-            href={`/user/${parentUsername}`}
+            href={`/exonaut/${parentUsername}`}
             className='custom-underline text-main-accent'
           >
             @{parentUsername}

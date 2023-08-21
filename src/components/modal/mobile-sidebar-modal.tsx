@@ -96,7 +96,7 @@ export function MobileSidebarModal({
     ['followers', 'Trackers', followers.length]
   ];
 
-  const userLink = `/user/${username}`;
+  const userLink = `/exonaut/${username}`;
 
   return (
     <>
@@ -186,7 +186,7 @@ export function MobileSidebarModal({
           <i className='h-0.5 bg-light-line-reply dark:bg-dark-line-reply' />
           <nav className='flex flex-col'>
             <MobileSidebarLink
-              href={`/user/${username}`}
+              href={`/exonaut/${username}`}
               iconName='UserIcon'
               linkName='Profile'
             />
