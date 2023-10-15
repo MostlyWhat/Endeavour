@@ -12,6 +12,7 @@ export type User = {
   location: string | null;
   username: string;
   photoURL: string;
+  whitelisted: boolean;
   verified: boolean;
   verifiedType: string | null;
   following: string[];

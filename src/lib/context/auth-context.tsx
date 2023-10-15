@@ -89,6 +89,7 @@ export function AuthContextProvider({
           location: null,
           photoURL: photoURL as string,
           username: randomUsername,
+          whitelisted: false,
           verified: false,
           verifiedType: null,
           following: [],
