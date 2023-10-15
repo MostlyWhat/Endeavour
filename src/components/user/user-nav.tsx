@@ -15,8 +15,8 @@ const allNavs = [
     { name: 'Likes', path: 'likes' }
   ],
   [
-    { name: 'Following', path: 'following' },
-    { name: 'Followers', path: 'followers' }
+    { name: 'Tracking', path: 'tracking' },
+    { name: 'Trackers', path: 'trackers' }
   ]
 ] as const;
 
@@ -28,7 +28,7 @@ export function UserNav({ follow }: UserNavProps): JSX.Element {
       className={cn(
         `hover-animation flex justify-between overflow-y-auto
          border-b border-light-border dark:border-dark-border`,
-        follow && 'mt-1 mb-0.5'
+        follow && 'mb-0.5 mt-1'
       )}
       {...variants}
       exit={undefined}

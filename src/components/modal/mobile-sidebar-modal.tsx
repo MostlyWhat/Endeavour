@@ -35,19 +35,13 @@ const topNavLinks: Readonly<MobileNavLink[]> = [
     iconName: 'ArrowPathIcon'
   },
   {
-    href: '/people',
-    linkName: 'Endeavour Circle',
+    href: '/exonauts',
+    linkName: 'Exonauts',
     iconName: 'UserGroupIcon'
   }
 ];
 
 const bottomNavLinks: Readonly<MobileNavLink[]> = [
-  {
-    href: '/settings',
-    linkName: 'Settings and privacy',
-    iconName: 'Cog8ToothIcon',
-    disabled: true
-  },
   {
     href: '/help-center',
     linkName: 'Help center',
@@ -63,6 +57,7 @@ type MobileSidebarModalProps = Pick<
   | 'name'
   | 'username'
   | 'verified'
+  | 'verifiedType'
   | 'photoURL'
   | 'following'
   | 'followers'
@@ -75,6 +70,7 @@ export function MobileSidebarModal({
   name,
   username,
   verified,
+  verifiedType,
   photoURL,
   following,
   followers,
@@ -96,11 +92,11 @@ export function MobileSidebarModal({
   } = useModal();
 
   const allStats: Readonly<Stats[]> = [
-    ['following', 'Following', following.length],
-    ['followers', 'Followers', followers.length]
+    ['following', 'Tracking', following.length],
+    ['followers', 'Trackers', followers.length]
   ];
 
-  const userLink = `/user/${username}`;
+  const userLink = `/exonaut/${username}`;
 
   return (
     <>
@@ -149,11 +145,11 @@ export function MobileSidebarModal({
             <div className='h-full rounded-md bg-light-line-reply dark:bg-dark-line-reply' />
           )}
         </Link>
-        <div className='mb-8 ml-2 -mt-4'>
+        <div className='-mt-4 mb-8 ml-2'>
           <UserAvatar
             className='absolute -translate-y-1/2 bg-main-background p-1 hover:brightness-100
-                     [&>figure>span]:[transition:200ms]
-                     [&:hover>figure>span]:brightness-75'
+                     [&:hover>figure>span]:brightness-75
+                     [&>figure>span]:[transition:200ms]'
             username={username}
             src={photoURL}
             alt={name}
@@ -166,6 +162,7 @@ export function MobileSidebarModal({
               name={name}
               username={username}
               verified={verified}
+              verifiedType={verifiedType}
               className='-mb-1'
             />
             <UserUsername username={username} />
@@ -189,7 +186,7 @@ export function MobileSidebarModal({
           <i className='h-0.5 bg-light-line-reply dark:bg-dark-line-reply' />
           <nav className='flex flex-col'>
             <MobileSidebarLink
-              href={`/user/${username}`}
+              href={`/exonaut/${username}`}
               iconName='UserIcon'
               linkName='Profile'
             />

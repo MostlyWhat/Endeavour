@@ -54,26 +54,11 @@ export function MoreSettings(): JSX.Element {
             <AnimatePresence>
               {open && (
                 <Menu.Items
-                  className='menu-container absolute -top-44 w-60 font-medium xl:w-11/12'
+                  className='menu-container absolute -top-32 w-60 font-medium xl:w-11/12'
                   as={motion.div}
                   {...variants}
                   static
                 >
-                  <Menu.Item>
-                    {({ active }): JSX.Element => (
-                      <MenuLink
-                        className={cn(
-                          'flex w-full cursor-not-allowed gap-3 rounded-t-md p-4 duration-200',
-                          active && 'bg-main-sidebar-background'
-                        )}
-                        href='/settings'
-                        onClick={preventBubbling()}
-                      >
-                        <HeroIcon iconName='Cog8ToothIcon' />
-                        Settings and privacy
-                      </MenuLink>
-                    )}
-                  </Menu.Item>
                   <Menu.Item>
                     {({ active }): JSX.Element => (
                       <MenuLink

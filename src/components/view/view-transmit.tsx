@@ -39,7 +39,14 @@ export function ViewTransmit(transmit: ViewTransmitProps): JSX.Element {
     user: transmitUserData
   } = transmit;
 
-  const { id: ownerId, name, username, verified, photoURL } = transmitUserData;
+  const {
+    id: ownerId,
+    name,
+    username,
+    verified,
+    verifiedType,
+    photoURL
+  } = transmitUserData;
 
   const { user } = useAuth();
 
@@ -93,6 +100,7 @@ export function ViewTransmit(transmit: ViewTransmitProps): JSX.Element {
                   name={name}
                   username={username}
                   verified={verified}
+                  verifiedType={verifiedType}
                 />
               </UserTooltip>
               <UserTooltip {...transmitUserData}>
@@ -118,7 +126,7 @@ export function ViewTransmit(transmit: ViewTransmitProps): JSX.Element {
         <p className='text-light-secondary dark:text-dark-secondary'>
           Replying to{' '}
           <Link
-            href={`/user/${parentUsername}`}
+            href={`/exonaut/${parentUsername}`}
             className='custom-underline text-main-accent'
           >
             @{parentUsername}

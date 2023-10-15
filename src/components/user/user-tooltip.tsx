@@ -16,6 +16,7 @@ type UserTooltipProps = Pick<
   | 'bio'
   | 'name'
   | 'verified'
+  | 'verifiedType'
   | 'username'
   | 'photoURL'
   | 'following'
@@ -36,6 +37,7 @@ export function UserTooltip({
   modal,
   avatar,
   verified,
+  verifiedType,
   children,
   photoURL,
   username,
@@ -47,11 +49,11 @@ export function UserTooltip({
 
   if (isMobile || modal) return <>{children}</>;
 
-  const userLink = `/user/${username}`;
+  const userLink = `/exonaut/${username}`;
 
   const allStats: Readonly<Stats[]> = [
-    ['following', 'Following', following.length],
-    ['followers', 'Followers', followers.length]
+    ['following', 'Tracking', following.length],
+    ['followers', 'Trackers', followers.length]
   ];
 
   return (
@@ -89,8 +91,8 @@ export function UserTooltip({
               <div className='mb-10'>
                 <UserAvatar
                   className='absolute -translate-y-1/2 bg-main-background p-1 
-                             hover:brightness-100 [&>figure>span]:[transition:200ms]
-                             [&:hover>figure>span]:brightness-75'
+                             hover:brightness-100 [&:hover>figure>span]:brightness-75
+                             [&>figure>span]:[transition:200ms]'
                   src={photoURL}
                   alt={name}
                   size={64}
@@ -105,6 +107,7 @@ export function UserTooltip({
                 name={name}
                 username={username}
                 verified={verified}
+                verifiedType={verifiedType}
               />
               <div className='flex items-center gap-1 text-light-secondary dark:text-dark-secondary'>
                 <UserUsername username={username} />

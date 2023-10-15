@@ -40,9 +40,9 @@ export function FollowButton({
         closeModal={closeModal}
       >
         <ActionModal
-          title={`Unfollow @${userTargetUsername}?`}
+          title={`Untrack @${userTargetUsername}?`}
           description='Their Transmits will no longer show up in your home timeline. You can still view their profile, unless their Transmits are protected.'
-          mainBtnLabel='Unfollow'
+          mainBtnLabel='Untrack'
           action={handleUnfollow}
           closeModal={closeModal}
         />
@@ -51,10 +51,10 @@ export function FollowButton({
         <Button
           className='dark-bg-tab min-w-[106px] self-start border border-light-line-reply px-4 py-1.5 
                      font-bold hover:border-accent-red hover:bg-accent-red/10 hover:text-accent-red
-                     hover:before:content-["Unfollow"] inner:hover:hidden dark:border-light-secondary'
+                     hover:before:content-["Untrack"] inner:hover:hidden dark:border-light-secondary'
           onClick={preventBubbling(openModal)}
         >
-          <span>Following</span>
+          <span>Tracking</span>
         </Button>
       ) : (
         <Button
@@ -64,7 +64,7 @@ export function FollowButton({
                      dark:active:bg-light-border/75'
           onClick={preventBubbling(handleFollow)}
         >
-          Follow
+          Track
         </Button>
       )}
     </>

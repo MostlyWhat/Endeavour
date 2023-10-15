@@ -13,11 +13,21 @@ type UserCardProps = User & {
 };
 
 export function UserCard(user: UserCardProps): JSX.Element {
-  const { id, bio, name, modal, follow, username, verified, photoURL } = user;
+  const {
+    id,
+    bio,
+    name,
+    modal,
+    follow,
+    username,
+    verified,
+    verifiedType,
+    photoURL
+  } = user;
 
   return (
     <Link
-      href={`/user/${username}`}
+      href={`/exonaut/${username}`}
       className='accent-tab hover-animation grid grid-cols-[auto,1fr] gap-3 px-4
                  py-3 hover:bg-light-primary/5 dark:hover:bg-dark-primary/5'
     >
@@ -33,6 +43,7 @@ export function UserCard(user: UserCardProps): JSX.Element {
                 name={name}
                 username={username}
                 verified={verified}
+                verifiedType={verifiedType}
               />
             </UserTooltip>
             <div className='flex items-center gap-1 text-light-secondary dark:text-dark-secondary'>

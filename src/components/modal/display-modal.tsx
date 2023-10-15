@@ -10,9 +10,9 @@ type DisplayModalProps = {
 };
 
 const themes: Readonly<[Theme, string][]> = [
-  ['light', 'Default'],
-  ['dim', 'Dim'],
-  ['dark', 'Lights out']
+  ['light', 'Polar'],
+  ['dim', 'Lunar'],
+  ['dark', 'Cosmos']
 ];
 
 const accentsColor: Readonly<Accent[]> = [
@@ -41,7 +41,7 @@ export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
           <UserAvatar src='/assets/avatar.jpg' alt='Endeavour' />
           <div>
             <div className='flex gap-1'>
-              <UserName verified name='Endeavour' />
+              <UserName verified verifiedType={'bot'} name='Endeavour' />
               <p className='text-light-secondary dark:text-dark-secondary'>
                 @endeavour
               </p>

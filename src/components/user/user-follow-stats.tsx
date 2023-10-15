@@ -42,11 +42,11 @@ export function UserFollowStats({
     query: { id }
   } = useRouter();
 
-  const userPath = `/user/${id as string}`;
+  const userPath = `/exonaut/${id as string}`;
 
   const allStats: Readonly<Stats[]> = [
-    ['Following', `${userPath}/following`, followingMove, currentFollowing],
-    ['Follower', `${userPath}/followers`, followersMove, currentFollowers]
+    ['Tracking', `${userPath}/tracking`, followingMove, currentFollowing],
+    ['Tracker', `${userPath}/trackers`, followersMove, currentFollowers]
   ];
 
   return (
@@ -59,7 +59,7 @@ export function UserFollowStats({
         <Link
           href={link}
           key={title}
-          className='hover-animation mt-0.5 mb-[3px] flex h-4 items-center gap-1 border-b 
+          className='hover-animation mb-[3px] mt-0.5 flex h-4 items-center gap-1 border-b 
                      border-b-transparent outline-none hover:border-b-light-primary 
                      focus-visible:border-b-light-primary dark:hover:border-b-dark-primary
                      dark:focus-visible:border-b-dark-primary'

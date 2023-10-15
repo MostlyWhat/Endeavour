@@ -17,7 +17,9 @@ export function AuthLayout({ children }: LayoutProps): JSX.Element {
 
       if (user) {
         await sleep(500);
-        void replace('/home');
+
+        if (user.whitelisted) void replace('/home');
+        else void replace('/whitelist');
       } else if (!loading) {
         await sleep(500);
         setPending(false);

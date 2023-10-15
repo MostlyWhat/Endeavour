@@ -5,7 +5,7 @@ import { useAuth } from '@lib/context/auth-context';
 import { usersCollection } from '@lib/firebase/collections';
 import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
 import {
-  PeopleLayout,
+  ExonautsLayout,
   ProtectedLayout
 } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
@@ -18,7 +18,7 @@ import { Error } from '@components/ui/error';
 import { variants } from '@components/aside/aside-message';
 import type { ReactElement, ReactNode } from 'react';
 
-export default function People(): JSX.Element {
+export default function Exonauts(): JSX.Element {
   const { user } = useAuth();
 
   const { data, loading, LoadMore } = useInfiniteScroll(
@@ -32,8 +32,8 @@ export default function People(): JSX.Element {
 
   return (
     <MainContainer>
-      <SEO title='People / Endeavour' />
-      <MainHeader useActionButton title='People' action={back} />
+      <SEO title='Exonauts / Endeavour' />
+      <MainHeader useActionButton title='Exonauts' action={back} />
       <section>
         {loading ? (
           <Loading className='mt-5' />
@@ -54,10 +54,10 @@ export default function People(): JSX.Element {
   );
 }
 
-People.getLayout = (page: ReactElement): ReactNode => (
+Exonauts.getLayout = (page: ReactElement): ReactNode => (
   <ProtectedLayout>
     <MainLayout>
-      <PeopleLayout>{page}</PeopleLayout>
+      <ExonautsLayout>{page}</ExonautsLayout>
     </MainLayout>
   </ProtectedLayout>
 );

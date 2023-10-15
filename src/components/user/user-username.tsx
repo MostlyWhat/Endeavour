@@ -14,7 +14,7 @@ export function UserUsername({
 }: UserUsernameProps): JSX.Element {
   return (
     <Link
-      href={`/user/${username}`}
+      href={`/exonaut/${username}`}
       className={cn(
         'truncate text-light-secondary dark:text-dark-secondary',
         className,

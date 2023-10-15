@@ -51,7 +51,14 @@ export function Transmit(transmit: TransmitProps): JSX.Element {
     user: transmitUserData
   } = transmit;
 
-  const { id: ownerId, name, username, verified, photoURL } = transmitUserData;
+  const {
+    id: ownerId,
+    name,
+    username,
+    verified,
+    verifiedType,
+    photoURL
+  } = transmitUserData;
 
   const { user } = useAuth();
 
@@ -97,7 +104,7 @@ export function Transmit(transmit: TransmitProps): JSX.Element {
           `accent-tab hover-card relative flex flex-col 
            gap-y-4 px-4 py-3 outline-none duration-200`,
           parentTransmit
-            ? 'mt-0.5 pt-2.5 pb-0'
+            ? 'mt-0.5 pb-0 pt-2.5'
             : 'border-b border-light-border dark:border-dark-border'
         )}
         onClick={delayScroll(200)}
@@ -137,6 +144,7 @@ export function Transmit(transmit: TransmitProps): JSX.Element {
                     name={name}
                     username={username}
                     verified={verified}
+                    verifiedType={verifiedType}
                     className='text-light-primary dark:text-dark-primary'
                   />
                 </UserTooltip>
@@ -171,7 +179,7 @@ export function Transmit(transmit: TransmitProps): JSX.Element {
               >
                 Replying to{' '}
                 <Link
-                  href={`/user/${parentUsername}`}
+                  href={`/exonaut/${parentUsername}`}
                   className='custom-underline text-main-accent'
                 >
                   @{parentUsername}

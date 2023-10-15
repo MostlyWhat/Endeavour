@@ -33,11 +33,11 @@ export function AsideMessage({
           and bugs are being fixed. Please be patient.
         </p>
         <Link
-          href='/people'
+          href='/updates'
           className='custom-button accent-tab hover-card block w-full rounded-2xl
                        rounded-t-none text-center text-main-accent'
         >
-          Read Announcement
+          Read Updates
         </Link>
       </motion.div>
     </section>

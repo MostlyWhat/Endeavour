@@ -3,22 +3,21 @@ import { useModal } from '@lib/hooks/useModal';
 import { NextImage } from '@components/ui/next-image';
 import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
-import { Modal } from '@components/modal/modal';
-import { SignInModal } from '@components/modal/signin-modal';
+// import { Modal } from '@components/modal/modal';
 
 export function LoginMain(): JSX.Element {
   const { signInWithGoogle } = useAuth();
-  const { open, openModal, closeModal } = useModal();
+  // const { open, openModal, closeModal } = useModal();
 
   return (
     <main className='grid lg:grid-cols-[1fr,45vw]'>
-      <Modal
+      {/* <Modal
         modalClassName='max-w-xl bg-main-background w-full p-8 rounded-2xl hover-animation'
         open={open}
         closeModal={closeModal}
       >
         <SignInModal closeModal={closeModal} />
-      </Modal>
+      </Modal> */}
       <div className='relative hidden items-center justify-center  lg:flex'>
         <NextImage
           imgClassName='object-cover'
@@ -59,7 +58,7 @@ export function LoginMain(): JSX.Element {
                          dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
               onClick={signInWithGoogle}
             >
-              <CustomIcon iconName='GoogleIcon' /> Sign up with Google
+              <CustomIcon iconName='GoogleIcon' /> Continue with Google
             </Button>
             <Button
               className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
@@ -67,7 +66,7 @@ export function LoginMain(): JSX.Element {
                          dark:bg-white dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
               // onClick={signInWithGitHub}
             >
-              <CustomIcon iconName='GitHubIcon' /> Sign up with GitHub
+              <CustomIcon iconName='GitHubIcon' /> Continue with GitHub
             </Button>
             <div className='grid w-full grid-cols-[1fr,auto,1fr] items-center gap-2'>
               <i className='border-b border-light-border dark:border-dark-border' />
@@ -78,7 +77,7 @@ export function LoginMain(): JSX.Element {
               className='cursor-not-allowed bg-accent-blue text-white transition hover:brightness-90
                          focus-visible:!ring-accent-blue/80 focus-visible:brightness-90 active:brightness-75'
             >
-              Sign up with phone or email
+              Continue with phone or email
             </Button>
             <p
               className='inner:custom-underline inner:custom-underline text-center text-xs
@@ -99,18 +98,18 @@ export function LoginMain(): JSX.Element {
               .
             </p>
           </div>
-          <div className='flex flex-col gap-3'>
+          {/* <div className='flex flex-col gap-3'>
             <p className='font-bold'>Already have an account? </p>
             <Button
               className='border border-light-line-reply font-bold text-accent-blue hover:bg-accent-blue/10
                          focus-visible:bg-accent-blue/10 focus-visible:!ring-accent-blue/80 active:bg-accent-blue/20
                          dark:border-light-secondary'
               // onClick={signInWithGoogle}
-              onClick={openModal}
+              // onClick={openModal}
             >
               Sign in
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </main>

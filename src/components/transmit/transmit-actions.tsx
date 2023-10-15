@@ -227,7 +227,7 @@ export function TransmitActions({
             <Popover.Button
               as={Button}
               className={cn(
-                `main-tab group group absolute top-2 right-2 p-2 
+                `main-tab group group absolute right-2 top-2 p-2 
                  hover:bg-accent-blue/10 focus-visible:bg-accent-blue/10
                  focus-visible:!ring-accent-blue/80 active:bg-accent-blue/20`,
                 open && 'bg-accent-blue/10 [&>div>svg]:text-accent-blue'
@@ -245,7 +245,7 @@ export function TransmitActions({
             <AnimatePresence>
               {open && (
                 <Popover.Panel
-                  className='menu-container group absolute top-[50px] right-2 whitespace-nowrap text-light-primary 
+                  className='menu-container group absolute right-2 top-[50px] whitespace-nowrap text-light-primary 
                              dark:text-dark-primary'
                   as={motion.div}
                   {...variants}
@@ -288,7 +288,7 @@ export function TransmitActions({
                       )}
                     >
                       <HeroIcon iconName='UserMinusIcon' />
-                      Unfollow @{username}
+                      Untrack @{username}
                     </Popover.Button>
                   ) : (
                     <Popover.Button
@@ -299,7 +299,7 @@ export function TransmitActions({
                       )}
                     >
                       <HeroIcon iconName='UserPlusIcon' />
-                      Follow @{username}
+                      Track @{username}
                     </Popover.Button>
                   )}
                   {(isAdmin || isOwner) && (
